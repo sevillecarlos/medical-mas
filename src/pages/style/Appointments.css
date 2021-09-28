@@ -1,0 +1,157 @@
+.add-patients {
+  background-color: rgba(127, 255, 212, 0.39) !important;
+}
+.date-filter {
+  width: 60% !important;
+  border: none;
+  padding: 5px;
+  text-align: center;
+}
+
+.status-filter {
+  width: 100% !important;
+}
+
+.patient-form {
+  border: none;
+  padding: 5px;
+  text-align: center;
+  font-size: 16px;
+}
+
+.form-input-phone,
+.text-phone-number {
+  border-radius: 20px !important;
+  border: none;
+  box-shadow: 1px 0px 14px 0px rgba(0, 0, 0, 0.36);
+  -webkit-box-shadow: 1px 0px 14px 0px rgba(0, 0, 0, 0.36);
+  -moz-box-shadow: 1px 0px 14px 0px rgba(0, 0, 0, 0.36);
+}
+.add-appointment{
+  background-color: rgba(8, 252, 69, 0.493) !important;
+
+}
+.show-detail-btn {
+  background-color: rgba(137, 43, 226, 0.493) !important;
+}
+
+.edit-btn {
+  background-color: rgba(255, 255, 0, 0.473) !important;
+  width: 100% !important;
+}
+.remove-btn {
+  margin-top: 5px;
+  width: 45% !important;
+  background-color: rgba(255, 0, 0, 0.459) !important;
+}
+
+.question {
+  width: 40% !important;
+}
+
+.close-btn {
+  background-color: rgba(0, 0, 0, 0.486) !important;
+}
+
+.open-btn {
+  background-color: rgba(0, 128, 0, 0.438) !important;
+}
+.status-appointment{
+  border-radius: 50px;
+  padding: 15px ;
+  width: 20%;
+  text-align: center;
+  color: aliceblue;
+}
+.open-status{
+  background-color: rgba(0, 128, 0, 0.774);
+}
+
+.close-status{
+  background-color: rgba(7, 14, 7, 0.774);
+}
+.inventory-table {
+  background-color: rgba(245, 245, 245, 0.87) !important;
+  border-radius: 20px;
+  margin: auto;
+  text-align: center;
+  width: 90% !important;
+  margin-top: 20px;
+  box-shadow: 1px 0px 14px 0px rgba(0, 0, 0, 0.36);
+  -webkit-box-shadow: 1px 0px 14px 0px rgba(0, 0, 0, 0.36);
+  -moz-box-shadow: 1px 0px 14px 0px rgba(0, 0, 0, 0.36);
+}
+.btn {
+  border: none !important;
+  border-radius: 20px !important;
+  color: rgb(7, 7, 7) !important;
+  background-color: rgba(172, 255, 47, 0.521);
+  box-shadow: 1px 0px 14px 0px rgba(0, 0, 0, 0.36);
+  -webkit-box-shadow: 1px 0px 14px 0px rgba(0, 0, 0, 0.36);
+  -moz-box-shadow: 1px 0px 14px 0px rgba(0, 0, 0, 0.36);
+}
+
+.filter-input {
+  width: 100% !important;
+  border-radius: 20px !important;
+  box-shadow: 1px 0px 14px 0px rgba(0, 0, 0, 0.36);
+  -webkit-box-shadow: 1px 0px 14px 0px rgba(0, 0, 0, 0.36);
+  -moz-box-shadow: 1px 0px 14px 0px rgba(0, 0, 0, 0.36);
+}
+
+.categories-filter {
+  width: 80% !important;
+  border-radius: 20px !important;
+  box-shadow: 1px 0px 14px 0px rgba(0, 0, 0, 0.36);
+  -webkit-box-shadow: 1px 0px 14px 0px rgba(0, 0, 0, 0.36);
+  -moz-box-shadow: 1px 0px 14px 0px rgba(0, 0, 0, 0.36);
+}
+
+.form-input-add-supply {
+  width: 100% !important;
+  border-radius: 20px !important;
+  box-shadow: 1px 0px 14px 0px rgba(0, 0, 0, 0.36);
+  -webkit-box-shadow: 1px 0px 14px 0px rgba(0, 0, 0, 0.36);
+  -moz-box-shadow: 1px 0px 14px 0px rgba(0, 0, 0, 0.36);
+}
+
+.add-supply-btn {
+  width: 100% !important;
+}
+.modal-add-supply {
+  border-radius: 20px !important;
+}
+.sub-header-inventory-table{
+    background-color: rgba(128, 128, 128, 0.507) !important;
+    font-size: 20px;
+}
+
+.quantity-td{
+    cursor: pointer;
+    width: 10%;
+}
+.modify-btn{
+  background-color: rgba(255, 217, 0, 0.459) !important;
+}
+
+.category-td{
+  width: 25%;
+}
+
+.remove-supply-btn{
+  background-color: rgba(255, 0, 0, 0.562) !important;
+  margin-top: 20px;
+}
+
+.quantity-row{
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.modal-content{
+  border-radius: 20px !important;
+}
+
+.error-name{
+  color: rgba(255, 0, 0, 0.562) !important;
+}

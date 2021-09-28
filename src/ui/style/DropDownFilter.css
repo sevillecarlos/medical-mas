@@ -1,0 +1,30 @@
+.filter-patient{
+    width: 100% !important;
+    background-color: transparent !important;
+}
+
+.patients-list{
+    width: 100% !important;
+    text-align: left !important;
+}
+.menu{
+    width: 100% !important;
+}
+.filter-control-patients{
+    width: 50% !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    padding: 5px !important;
+}
+
+.appointment-time{
+    width: 100%;
+    border-radius: 20px !important;
+    text-align: center;
+    background-color: transparent !important;
+    border: transparent !important;
+    padding: 2px;
+    box-shadow: 1px 0px 14px 0px rgba(0, 0, 0, 0.36);
+    -webkit-box-shadow: 1px 0px 14px 0px rgba(0, 0, 0, 0.36);
+    -moz-box-shadow: 1px 0px 14px 0px rgba(0, 0, 0, 0.36);
+}

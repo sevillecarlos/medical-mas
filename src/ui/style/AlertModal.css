@@ -1,0 +1,20 @@
+.modal-alert{
+    background-color: transparent !important;
+    height: 86px !important;
+    border-radius: 50px !important;
+  }
+  .modal-alert-card{
+      background-color: transparent !important;
+  }
+  .alert-backdrop{
+    background-color: transparent !important;
+  }
+  .alert{
+      background-color: rgba(172, 255, 47, 0.425) !important;
+  }
+
+  .alert-model-content{
+      background-color: transparent !important;
+      border: none !important;
+      text-align: center !important;
+  }

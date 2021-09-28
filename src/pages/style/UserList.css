@@ -1,0 +1,54 @@
+.user-list {
+  margin-top: 50px;
+}
+
+.users-card {
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 5px;
+  text-align: center;
+  border-radius: 50px !important;
+  background-color: rgba(245, 245, 245, 0.87) !important;  box-shadow: 1px 0px 14px 0px rgba(0, 0, 0, 0.36);
+  -webkit-box-shadow: 1px 0px 14px 0px rgba(0, 0, 0, 0.36);
+  -moz-box-shadow: 1px 0px 14px 0px rgba(0, 0, 0, 0.36);
+
+}
+
+.password-user-list {
+  width: 31% !important;
+  border-radius: 20px !important;
+  border: none !important;
+  background-color: transparent !important;
+}
+
+.user-info-label {
+  font-weight: normal;
+}
+.user-info {
+  font-weight: bold;
+  font-size: 15px;
+  margin-right: 55px;
+}
+
+.show-password-user {
+  background-color: rgba(39, 204, 168, 0.479) !important;
+  width: 100%;
+  font-size: 15px !important;
+  border-radius: 20px !important;
+}
+
+.input-show-user-password {
+  box-shadow: 1px 0px 14px 0px rgba(0, 0, 0, 0.36);
+  -webkit-box-shadow: 1px 0px 14px 0px rgba(0, 0, 0, 0.36);
+  -moz-box-shadow: 1px 0px 14px 0px rgba(0, 0, 0, 0.36);
+}
+
+.text-show-password {
+  border: none !important;
+  background-color: transparent !important;
+}
+
+.edit-user-list {
+  border-radius: 20px !important;
+  background-color: rgba(255, 255, 0, 0.527) !important;
+}
