@@ -27,9 +27,8 @@
   -webkit-box-shadow: 1px 0px 14px 0px rgba(0, 0, 0, 0.36);
   -moz-box-shadow: 1px 0px 14px 0px rgba(0, 0, 0, 0.36);
 }
-.add-appointment{
+.add-appointment {
   background-color: rgba(8, 252, 69, 0.493) !important;
-
 }
 .show-detail-btn {
   background-color: rgba(137, 43, 226, 0.493) !important;
@@ -56,18 +55,18 @@
 .open-btn {
   background-color: rgba(0, 128, 0, 0.438) !important;
 }
-.status-appointment{
+.status-appointment {
   border-radius: 50px;
-  padding: 15px ;
+  padding: 15px;
   width: 20%;
   text-align: center;
   color: aliceblue;
 }
-.open-status{
+.open-status {
   background-color: rgba(0, 128, 0, 0.774);
 }
 
-.close-status{
+.close-status {
   background-color: rgba(7, 14, 7, 0.774);
 }
 .inventory-table {
@@ -115,43 +114,46 @@
   -moz-box-shadow: 1px 0px 14px 0px rgba(0, 0, 0, 0.36);
 }
 
-.add-supply-btn {
+.add-appointment-btn,
+.add-patient-btn {
   width: 100% !important;
+  background-color: rgba(0, 128, 0, 0.582) !important;
 }
+
 .modal-add-supply {
   border-radius: 20px !important;
 }
-.sub-header-inventory-table{
-    background-color: rgba(128, 128, 128, 0.507) !important;
-    font-size: 20px;
+.sub-header-inventory-table {
+  background-color: rgba(128, 128, 128, 0.507) !important;
+  font-size: 20px;
 }
 
-.quantity-td{
-    cursor: pointer;
-    width: 10%;
+.quantity-td {
+  cursor: pointer;
+  width: 10%;
 }
-.modify-btn{
+.modify-btn {
   background-color: rgba(255, 217, 0, 0.459) !important;
 }
 
-.category-td{
+.category-td {
   width: 25%;
 }
 
-.remove-supply-btn{
+.remove-supply-btn {
   background-color: rgba(255, 0, 0, 0.562) !important;
   margin-top: 20px;
 }
 
-.quantity-row{
+.quantity-row {
   font-size: 20px;
   font-weight: bold;
 }
 
-.modal-content{
+.modal-content {
   border-radius: 20px !important;
 }
 
-.error-name{
+.error-name {
   color: rgba(255, 0, 0, 0.562) !important;
 }

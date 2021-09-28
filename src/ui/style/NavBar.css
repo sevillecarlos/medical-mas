@@ -9,7 +9,11 @@
 .nav-bar {
   background-color: rgba(245, 245, 245, 0.87) !important;
   border-radius: 100px;
-  margin-top: 5px;
+  width: 80%;
+  margin: auto;
+  margin-top: 1%;
+  position: absolute;
+
   box-shadow: 1px 0px 14px 0px rgba(0, 0, 0, 0.36);
   -webkit-box-shadow: 1px 0px 14px 0px rgba(0, 0, 0, 0.36);
   -moz-box-shadow: 1px 0px 14px 0px rgba(0, 0, 0, 0.36);
@@ -24,28 +28,31 @@
   margin-left: 475px;
 }
 
-.user-dropdown{
-  margin-left: 700px;
+.user-dropdown {
+  margin-left: 20vw;
+  font-size: 1vw !important;
+  color: black !important;
+  position: relative;
 }
-.form-input-add-user{
+.form-input-add-user {
   border-radius: 20px !important;
   box-shadow: 1px 0px 14px 0px rgba(0, 0, 0, 0.36);
   -webkit-box-shadow: 1px 0px 14px 0px rgba(0, 0, 0, 0.36);
   -moz-box-shadow: 1px 0px 14px 0px rgba(0, 0, 0, 0.36);
 }
 
-.add-user-btn{
+.add-user-btn {
   background-color: rgba(148, 255, 127, 0.452) !important;
   border-radius: 20px !important;
   width: 100%;
 }
-.badge-user{
+.badge-user {
   color: black !important;
-  margin-left: 5px ;
+  margin-left: 5px;
   font-size: 19px !important;
   font-weight: bold;
 }
-.suggestion-username-btn{
+.suggestion-username-btn {
   border-radius: 20px !important;
   background-color: rgb(255, 255, 255) !important;
 }

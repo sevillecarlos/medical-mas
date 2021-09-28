@@ -121,17 +121,15 @@ const Appointment = () => {
       return { ...prevState, [e.target.name]: e.target.value };
     });
 
-  const statusFilter = (e: any) => {
-    console.log(e.target.value);
+  const statusFilter = (e?: any) => {
+    const filterValue = e?.target.value ? e.target.value : 1;
     const filterAppoinmentArr = appointment.appointments.filter(
       (appointment: { status: boolean }) => {
-        return appointment.status == e.target.value;
+        return appointment.status == filterValue;
       }
     );
 
-    setAppointmentList(
-      !e.target.value ? appointment.appointments : filterAppoinmentArr
-    );
+    setAppointmentList(filterAppoinmentArr);
   };
 
   useEffect(() => {
@@ -142,6 +140,7 @@ const Appointment = () => {
   useEffect(() => {
     if (appointment.appointments) {
       setAppointmentList(appointment.appointments);
+      statusFilter();
     }
   }, [appointment.appointments]);
 
@@ -244,17 +243,17 @@ const Appointment = () => {
 
   const handleChangeFilterDate = (date: any) => {
     setFilterDate(date); //fix the bug
+    statusFilter()
     const formatDate = new Date(date).toLocaleDateString();
 
-    const filterDateAppointments = appointment.appointments.filter(
+    const filterDateAppointments = appointmentList.filter(
       (v: any) => v.date === formatDate
     );
 
     setAppointmentList(
-      filterDateAppointments.length !== 0
-        ? filterDateAppointments
-        : appointment.appointments
+      filterDateAppointments.length !== 0 ? filterDateAppointments : appointmentList
     );
+
   };
 
   const modifyAppointmentStatus = (e: any, id: any, status: any) => {
@@ -335,7 +334,7 @@ const Appointment = () => {
               <Form.Label>Phone Number</Form.Label>
               <InputGroup className="mb-3">
                 <InputGroup.Text className="text-phone-number">
-                  +504
+                  +
                 </InputGroup.Text>
                 <FormControl
                   placeholder="Enter your phone number"
@@ -356,7 +355,7 @@ const Appointment = () => {
                 style={{ height: "90px" }}
               />
             </Form.Group>
-            <Button type="submit" className="add-supply-btn">
+            <Button type="submit" className="add-patient-btn">
               Add Patient
               <AiOutlineUserAdd style={{ marginLeft: "5px" }} size={20} />
             </Button>
@@ -527,6 +526,7 @@ const Appointment = () => {
               <Form.Control
                 as="textarea"
                 onChange={changeAppointmentForm}
+                value={appointmentForm.reason}
                 className="form-input-add-supply"
                 placeholder="Enter a reason of the appointment"
                 name="reason"
@@ -534,7 +534,7 @@ const Appointment = () => {
               />
             </Form.Group>
 
-            <Button type="submit" className="add-supply-btn">
+            <Button type="submit" className="add-appointment-btn">
               Add Appointment
               <AiOutlineUserAdd style={{ marginLeft: "5px" }} size={20} />
             </Button>
@@ -577,9 +577,8 @@ const Appointment = () => {
                 onChange={statusFilter}
                 className="filter-input status-filter"
               >
-                <option value="">Select status</option>
-                <option value={1}>Open Appointsment</option>
-                <option value={0}>Close Appointsment </option>
+                <option value={1}>Open Appointments</option>
+                <option value={0}>Close Appointments </option>
               </Form.Select>
             </th>
           </tr>
