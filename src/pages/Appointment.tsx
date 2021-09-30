@@ -2,25 +2,25 @@ import React, { useState, useEffect } from "react";
 import {
   Table,
   Button,
-  FormControl,
   Form,
   Modal,
-  InputGroup,
-  Alert,
 } from "react-bootstrap";
 import { GrFormAdd } from "react-icons/gr";
-import { AiOutlineEdit, AiOutlineUserAdd } from "react-icons/ai";
+import {
+  AiOutlineUserAdd,
+  AiOutlineSortDescending,
+} from "react-icons/ai";
 import { BiCommentDetail } from "react-icons/bi";
 import DatePicker from "react-datepicker";
 import { BsFillUnlockFill, BsFillLockFill } from "react-icons/bs";
 import { RootStateOrAny, useDispatch, useSelector } from "react-redux";
 
 import DropDownFilter from "../ui/DropDownFilter";
-import { MdDelete } from "react-icons/md";
 
 import TimePicker from "react-time-picker";
+//MODALS
+import RegisterPatientModal from "../components/RegisterPatientModal";
 
-import RemoveConfModal from "../ui/RemoveConfModal";
 
 import {
   getPatients,
@@ -28,8 +28,6 @@ import {
   createPatient,
   getAppointments,
   createAppointments,
-  updateAppointments,
-  deleteAppointments,
   updateAppointmentStatus,
 } from "../store/slices/appointments";
 
@@ -60,26 +58,17 @@ const Appointment = () => {
   const [showRegisterPatients, setShowRegisterPatients] = useState(false);
 
   const [showRegisterAppointment, setShowRegisterAppointment] = useState(false);
-
   const [showDetailAppointment, setShowDetailAppointment] = useState(false);
 
-  const [showModifyAppointment, setShowModifyAppointment] = useState(false);
 
   const handleCloseRegisterPatients = () => setShowRegisterPatients(false);
 
   const handleCloseRegisterAppointment = () =>
     setShowRegisterAppointment(false);
 
-  const handleCloseDetailsAppointment = () => {
-    setShowDetailAppointment(false);
-    setShowModifyAppointment(false);
-  };
-
+ 
   const [appointmentId, setAppointmentId] = useState(null);
 
-  const handleRemoveModalClose = () => {
-    setShowRemoveModal(false);
-  };
 
   const [patientForm, setPatientForm] = useState({
     patient_id: "",
@@ -113,7 +102,6 @@ const Appointment = () => {
     status: false,
   });
 
-  const [showRemoveModal, setShowRemoveModal] = useState(false);
   const [appointmentList, setAppointmentList] = useState(Array<any>());
 
   const changePatientForm = (e: any) =>
@@ -129,7 +117,10 @@ const Appointment = () => {
       }
     );
 
-    setAppointmentList(filterAppoinmentArr);
+    const sortAppointment = filterAppoinmentArr.sort((a: any, b: any) =>
+      a.date > b.date ? 1 : 0
+    );
+    setAppointmentList(sortAppointment);
   };
 
   useEffect(() => {
@@ -225,25 +216,13 @@ const Appointment = () => {
     });
   };
 
-  const modifyAppointment = (e: any) => {
-    e.preventDefault();
-    dispatch(updateAppointments({ ...appointmentForm, id: appointmentId }));
-    setShowDetailAppointment(false);
-    setShowModifyAppointment(false);
-  };
 
-  const removeAppointment = () => {
-    dispatch(deleteAppointments(appointmentId));
-    setShowDetailAppointment(false);
-    setShowModifyAppointment(false);
-    setShowRemoveModal(false);
-  };
 
   const [filterDate, setFilterDate] = useState(null);
 
   const handleChangeFilterDate = (date: any) => {
     setFilterDate(date); //fix the bug
-    statusFilter()
+    statusFilter();
     const formatDate = new Date(date).toLocaleDateString();
 
     const filterDateAppointments = appointmentList.filter(
@@ -251,14 +230,23 @@ const Appointment = () => {
     );
 
     setAppointmentList(
-      filterDateAppointments.length !== 0 ? filterDateAppointments : appointmentList
+      filterDateAppointments.length !== 0
+        ? filterDateAppointments
+        : appointmentList
     );
-
   };
 
   const modifyAppointmentStatus = (e: any, id: any, status: any) => {
     e.preventDefault();
     dispatch(updateAppointmentStatus({ status: !status, id }));
+  };
+
+  const sortByAlphabetic = () => {
+    const sortAppointmentList = appointmentList.sort((a: any, b: any) =>
+      getPatientName(a.patient_id) > getPatientName(b.patient_id) ? 1 : 0
+    );
+    console.log(sortAppointmentList);
+    setAppointmentList(sortAppointmentList);
   };
   return (
     <div className="appointments">
@@ -267,222 +255,16 @@ const Appointment = () => {
         msg={appointment.msg}
       />
 
-      <Modal
-        show={showRegisterPatients}
-        className="modal-modify-supply"
-        onHide={handleCloseRegisterPatients}
-        backdrop="static"
-      >
-        <Modal.Header closeButton>
-          <Modal.Title>Register Patient</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          <Form onSubmit={submitAddPatient} autoComplete="off">
-            <Form.Group className="mb-3" controlId="formBasicEmail">
-              <Form.Label>ID Number</Form.Label>
-              <Form.Control
-                className="form-input-add-supply"
-                type="text"
-                onChange={changePatientForm}
-                name="patient_id"
-                placeholder="Enter patient ID"
-              />
-            </Form.Group>
-            <Form.Group className="mb-3" controlId="formBasicEmail">
-              <Form.Label>First Name</Form.Label>
-              <Form.Control
-                className="form-input-add-supply"
-                type="text"
-                onChange={changePatientForm}
-                name="first_name"
-                placeholder="Enter first name"
-              />
-            </Form.Group>
-            <Form.Group className="mb-3" controlId="formBasicEmail">
-              <Form.Label>Last Name</Form.Label>
-              <Form.Control
-                className="form-input-add-supply"
-                type="text"
-                onChange={changePatientForm}
-                name="last_name"
-                placeholder="Enter last name"
-              />
-            </Form.Group>
-            <Form.Group className="mb-3" controlId="formBasicEmail">
-              <Form.Label>Birth Date</Form.Label>
-              <DatePicker
-                onChange={handleChangePatientDate}
-                value={patientForm.birth_date}
-                className="filter-input patient-form"
-                placeholderText="Enter your birth day"
-              />
-            </Form.Group>
-            <Form.Group className="mb-3" controlId="formBasicEmail">
-              <Form.Label>Select Gender</Form.Label>
-              <Form.Select
-                className="form-input-add-supply"
-                onChange={changePatientForm}
-                name="patient_gender"
-                required={true}
-              >
-                <option>Select your gender</option>
-                <option>Female</option>
-                <option>Male</option>
-              </Form.Select>
-            </Form.Group>
-            <Form.Group className="mb-3">
-              <Form.Label>Phone Number</Form.Label>
-              <InputGroup className="mb-3">
-                <InputGroup.Text className="text-phone-number">
-                  +
-                </InputGroup.Text>
-                <FormControl
-                  placeholder="Enter your phone number"
-                  className="form-input-phone"
-                  name="phone_number"
-                  onChange={changePatientForm}
-                />
-              </InputGroup>
-            </Form.Group>
-            <Form.Group className="mb-3" controlId="formBasicEmail">
-              <Form.Label>Address</Form.Label>
-              <Form.Control
-                as="textarea"
-                onChange={changePatientForm}
-                className="form-input-add-supply"
-                placeholder="Enter a detail of the item"
-                name="address"
-                style={{ height: "90px" }}
-              />
-            </Form.Group>
-            <Button type="submit" className="add-patient-btn">
-              Add Patient
-              <AiOutlineUserAdd style={{ marginLeft: "5px" }} size={20} />
-            </Button>
-          </Form>
-        </Modal.Body>
-      </Modal>
+      <RegisterPatientModal
+        submitAddPatient={submitAddPatient}
+        handleCloseRegisterPatients={handleCloseRegisterPatients}
+        showRegisterPatients={showRegisterPatients}
+        handleChangePatientDate={handleChangePatientDate}
+        changePatientForm={changePatientForm}
+        patientForm={patientForm}
+      />
 
-      <Modal
-        show={showDetailAppointment}
-        className="modal-modify-supply"
-        onHide={handleCloseDetailsAppointment}
-        backdrop="static"
-      >
-        <RemoveConfModal
-          show={showRemoveModal}
-          handleClose={handleRemoveModalClose}
-          onClickRemove={removeAppointment}
-        />
-        <Modal.Header closeButton>
-          <Modal.Title>Appointment Detail</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          <Form onSubmit={submitAddAppointment} autoComplete="off">
-            <Form.Group className="mb-3" controlId="formBasicEmail">
-              <Form.Label>Apppointment Status</Form.Label>
-              <div
-                className={`status-appointment ${
-                  dateAppointmentForm.status ? "open" : "close"
-                }-status`}
-              >
-                {dateAppointmentForm.status ? "Open" : "Close"}
-              </div>
-            </Form.Group>
-            <Form.Group className="mb-3" controlId="formBasicEmail">
-              <Form.Label>Patient</Form.Label>
-              <h5>{getPatientName(appointmentFormDetail.patient_id)}</h5>
-            </Form.Group>
-            {!showModifyAppointment ? (
-              <>
-                {" "}
-                <Form.Group className="mb-3" controlId="formBasicEmail">
-                  <Form.Label>Patient Id Number</Form.Label>
-                  <h5>{dateAppointmentForm.patient_id_number}</h5>
-                </Form.Group>
-                <Form.Group className="mb-3" controlId="formBasicEmail">
-                  <Form.Label>Date</Form.Label>
-                  <h5>{appointmentFormDetail.date}</h5>
-                </Form.Group>
-                <Form.Group className="mb-3" controlId="formBasicEmail">
-                  <Form.Label>Time</Form.Label>
-                  <h5>{appointmentFormDetail.time}</h5>
-                </Form.Group>
-                <Form.Group className="mb-3" controlId="formBasicEmail">
-                  <Form.Label>Reason</Form.Label>
-                  <h5>{appointmentFormDetail.reason}</h5>
-                </Form.Group>
-                <Form.Group className="mb-3" controlId="formBasicEmail">
-                  <Form.Label>Created at:</Form.Label>
-                  <h5>{dateAppointmentForm.created_at}</h5>
-                </Form.Group>
-              </>
-            ) : (
-              <>
-                <Form.Group className="mb-3" controlId="formBasicEmail">
-                  <Form.Label>Date</Form.Label>
-                  <DatePicker
-                    onChange={handleChangeAppointmentDate}
-                    value={appointmentFormDetail.date}
-                    className="filter-input patient-form"
-                    placeholderText="Enter your appointment date"
-                  />
-                </Form.Group>
-                <Form.Group className="mb-3" controlId="formBasicEmail">
-                  <Form.Label>Time</Form.Label>
-                  <TimePicker
-                    disableClock
-                    className="appointment-time"
-                    amPmAriaLabel={"Select am/pm"}
-                    onChange={changeAppointmentTime}
-                    value={appointmentFormDetail.time}
-                  />
-                </Form.Group>
-                <Form.Group className="mb-3" controlId="formBasicEmail">
-                  <Form.Label>Reason</Form.Label>
-                  <Form.Control
-                    as="textarea"
-                    onChange={changeAppointmentForm}
-                    className="form-input-add-supply"
-                    placeholder="Enter a reason of the appointment"
-                    name="reason"
-                    value={appointmentFormDetail.reason}
-                    style={{ height: "90px" }}
-                  />
-                </Form.Group>
-              </>
-            )}
-            {dateAppointmentForm.status ? (
-              !showModifyAppointment ? (
-                <Button
-                  onClick={() => setShowModifyAppointment(true)}
-                  className="edit-btn question"
-                >
-                  Want to modify?
-                  <AiOutlineEdit style={{ marginLeft: "5px" }} size={20} />
-                </Button>
-              ) : (
-                <>
-                  <Button onClick={modifyAppointment} className="edit-btn">
-                    Modify appointment
-                    <AiOutlineEdit style={{ marginLeft: "5px" }} size={20} />
-                  </Button>
-                  <br />
-
-                  <Button
-                    onClick={() => setShowRemoveModal(true)}
-                    className="remove-btn"
-                  >
-                    Remove appointment
-                    <MdDelete style={{ marginLeft: "5px" }} size={20} />
-                  </Button>
-                </>
-              )
-            ) : null}{" "}
-          </Form>
-        </Modal.Body>
-      </Modal>
-
+      
       <Modal
         show={showRegisterAppointment}
         className="modal-modify-supply"
@@ -580,6 +362,15 @@ const Appointment = () => {
                 <option value={1}>Open Appointments</option>
                 <option value={0}>Close Appointments </option>
               </Form.Select>
+            </th>
+            <th>
+              <Button className="add-patients" onClick={sortByAlphabetic}>
+                Sort
+                <AiOutlineSortDescending
+                  style={{ marginLeft: "5px" }}
+                  size={20}
+                />
+              </Button>
             </th>
           </tr>
         </thead>
