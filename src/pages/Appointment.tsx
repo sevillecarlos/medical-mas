@@ -1,15 +1,7 @@
 import React, { useState, useEffect } from "react";
-import {
-  Table,
-  Button,
-  Form,
-  Modal,
-} from "react-bootstrap";
+import { Table, Button, Form, Modal } from "react-bootstrap";
 import { GrFormAdd } from "react-icons/gr";
-import {
-  AiOutlineUserAdd,
-  AiOutlineSortDescending,
-} from "react-icons/ai";
+import { AiOutlineUserAdd, AiOutlineSortDescending } from "react-icons/ai";
 import { BiCommentDetail } from "react-icons/bi";
 import DatePicker from "react-datepicker";
 import { BsFillUnlockFill, BsFillLockFill } from "react-icons/bs";
@@ -20,7 +12,7 @@ import DropDownFilter from "../ui/DropDownFilter";
 import TimePicker from "react-time-picker";
 //MODALS
 import RegisterPatientModal from "../components/RegisterPatientModal";
-
+import ShowDetailPatientModal from "../components/ShowDetailPatientModal";
 
 import {
   getPatients,
@@ -60,15 +52,12 @@ const Appointment = () => {
   const [showRegisterAppointment, setShowRegisterAppointment] = useState(false);
   const [showDetailAppointment, setShowDetailAppointment] = useState(false);
 
-
   const handleCloseRegisterPatients = () => setShowRegisterPatients(false);
 
   const handleCloseRegisterAppointment = () =>
     setShowRegisterAppointment(false);
 
- 
   const [appointmentId, setAppointmentId] = useState(null);
-
 
   const [patientForm, setPatientForm] = useState({
     patient_id: "",
@@ -216,12 +205,10 @@ const Appointment = () => {
     });
   };
 
-
-
   const [filterDate, setFilterDate] = useState(null);
 
   const handleChangeFilterDate = (date: any) => {
-    setFilterDate(date); //fix the bug
+    setFilterDate(date);
     statusFilter();
     const formatDate = new Date(date).toLocaleDateString();
 
@@ -264,7 +251,20 @@ const Appointment = () => {
         patientForm={patientForm}
       />
 
-      
+      <ShowDetailPatientModal
+        appointmentForm={appointmentForm}
+        appointmentId={appointmentId}
+        setShowDetailAppointment={setShowDetailAppointment}
+        showDetailAppointment={showDetailAppointment}
+        dateAppointmentForm={dateAppointmentForm}
+        patientName={getPatientName(appointmentFormDetail.patient_id)}
+        changeAppointmentTime={changeAppointmentTime}
+        submitAddAppointment={submitAddAppointment}
+        appointmentFormDetail={appointmentFormDetail}
+        handleChangeAppointmentDate={handleChangeAppointmentDate}
+        changeAppointmentForm={changeAppointmentForm}
+      />
+
       <Modal
         show={showRegisterAppointment}
         className="modal-modify-supply"
