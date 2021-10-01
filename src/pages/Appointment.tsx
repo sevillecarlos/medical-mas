@@ -1,23 +1,21 @@
 import React, { useState, useEffect } from "react";
-import { Table, Button, Form, Modal } from "react-bootstrap";
+import { Table, Button, Form, OverlayTrigger, Popover } from "react-bootstrap";
 import { GrFormAdd } from "react-icons/gr";
-import { AiOutlineUserAdd, AiOutlineSortDescending } from "react-icons/ai";
+import { AiOutlineUserAdd } from "react-icons/ai";
 import { BiCommentDetail } from "react-icons/bi";
 import DatePicker from "react-datepicker";
 import { BsFillUnlockFill, BsFillLockFill } from "react-icons/bs";
+import { IoMdColorPalette } from "react-icons/io";
+
 import { RootStateOrAny, useDispatch, useSelector } from "react-redux";
-
-import DropDownFilter from "../ui/DropDownFilter";
-
-import TimePicker from "react-time-picker";
 //MODALS
 import RegisterPatientModal from "../components/RegisterPatientModal";
 import ShowDetailPatientModal from "../components/ShowDetailPatientModal";
+import AddAppointmentModal from "../components/AddAppointmentModal";
 
 import {
   getPatients,
   appointmentAction,
-  createPatient,
   getAppointments,
   createAppointments,
   updateAppointmentStatus,
@@ -28,19 +26,22 @@ import "./style/Appointments.css";
 
 import AlertModal from "../ui/AlertModal";
 
+const todayDate = new Date().toLocaleDateString();
 const Appointment = () => {
   const dispatch = useDispatch();
 
   const appointment = useSelector((state: RootStateOrAny) => state.appointment);
 
-  const handleChangePatientDate = (date: any) =>
-    setPatientForm((prevState: any) => {
-      const formatDate = new Date(date).toLocaleDateString();
-      return { ...prevState, birth_date: formatDate };
-    });
 
-  const handleChangeAppointmentDate = (date: any) => {
+  const handleChangeAppointmentDate = (date: string) => {
     setAppointmentForm((prevState: any) => {
+      const formatDate = new Date(date).toLocaleDateString();
+
+      return { ...prevState, date: formatDate };
+    });
+  };
+  const handleUpdateAppointmentDate = (date: string) => {
+    setAppointmentFormDetail((prevState: any) => {
       const formatDate = new Date(date).toLocaleDateString();
 
       return { ...prevState, date: formatDate };
@@ -59,15 +60,7 @@ const Appointment = () => {
 
   const [appointmentId, setAppointmentId] = useState(null);
 
-  const [patientForm, setPatientForm] = useState({
-    patient_id: "",
-    first_name: "",
-    last_name: "",
-    birth_date: "",
-    patient_gender: "",
-    phone_number: "",
-    address: "",
-  });
+
 
   const [appointmentForm, setAppointmentForm] = useState({
     patient_id: 0,
@@ -85,18 +78,10 @@ const Appointment = () => {
     status: true,
   });
 
-  const [dateAppointmentForm, setDateAppointmentForm] = useState({
-    created_at: "",
-    patient_id_number: "",
-    status: false,
-  });
+  const [dateAppointmentForm, setDateAppointmentForm] = useState({});
 
   const [appointmentList, setAppointmentList] = useState(Array<any>());
 
-  const changePatientForm = (e: any) =>
-    setPatientForm((prevState: any) => {
-      return { ...prevState, [e.target.name]: e.target.value };
-    });
 
   const statusFilter = (e?: any) => {
     const filterValue = e?.target.value ? e.target.value : 1;
@@ -106,10 +91,11 @@ const Appointment = () => {
       }
     );
 
-    const sortAppointment = filterAppoinmentArr.sort((a: any, b: any) =>
-      a.date > b.date ? 1 : 0
+    const orderByDate = filterAppoinmentArr.sort(
+      (a: { date: string }, b: { date: string }) =>
+        new Date(b.date).valueOf() - new Date(a.date).valueOf()
     );
-    setAppointmentList(sortAppointment);
+    setAppointmentList(orderByDate);
   };
 
   useEffect(() => {
@@ -140,11 +126,6 @@ const Appointment = () => {
     }
   }, [appointment.reload, dispatch]);
 
-  const submitAddPatient = (e: any) => {
-    e.preventDefault();
-    dispatch(createPatient(patientForm));
-    handleCloseRegisterPatients();
-  };
 
   const submitAddAppointment = (e: any) => {
     e.preventDefault();
@@ -177,13 +158,17 @@ const Appointment = () => {
     setAppointmentForm((prevState: any) => {
       return { ...prevState, time: e };
     });
+  const upDateAppointmentTime = (e: any) =>
+    setAppointmentFormDetail((prevState: any) => {
+      return { ...prevState, time: e };
+    });
 
-  const getPatientIdNumber = (patientId: any) => {
-    const idPatientNumber = appointment.patients?.filter(
+  const getPatient = (patientId: number) => {
+    const patient = appointment.patients?.filter(
       (v: any) => v.id === patientId
-    )[0];
+    );
 
-    return idPatientNumber?.patient_id;
+    return patient[0];
   };
 
   const showDetail = (appointmentData: any) => {
@@ -191,9 +176,10 @@ const Appointment = () => {
     const { patient_id, reason, date, time, created_at, id, status } =
       appointmentData;
     setAppointmentId(id);
+    const patientInfo = getPatient(patient_id);
     setDateAppointmentForm({
       created_at: new Date(created_at).toLocaleDateString(),
-      patient_id_number: getPatientIdNumber(patient_id),
+      ...patientInfo,
       status,
     });
     setAppointmentFormDetail({
@@ -208,33 +194,29 @@ const Appointment = () => {
   const [filterDate, setFilterDate] = useState(null);
 
   const handleChangeFilterDate = (date: any) => {
-    setFilterDate(date);
-    statusFilter();
-    const formatDate = new Date(date).toLocaleDateString();
-
-    const filterDateAppointments = appointmentList.filter(
-      (v: any) => v.date === formatDate
-    );
-
-    setAppointmentList(
-      filterDateAppointments.length !== 0
-        ? filterDateAppointments
-        : appointmentList
-    );
+    // setFilterDate(date);
+    // const formatDate = new Date(date).toLocaleDateString();
+    // const filterDateAppointments = appointmentList.filter(
+    //   (v: any) => v.date === formatDate
+    // );
+    // setAppointmentList(filterDateAppointments);
   };
 
+  const popoverMapKey = (
+    <Popover id="popover-color-map-key">
+      <Popover.Body>
+        <p>Appointment Date </p>
+        <span className="appointment-remainder soon">SOON </span>
+        <span className="appointment-remainder today">TODAY </span>
+        <span className="appointment-remainder late">LATE </span>
+      </Popover.Body>
+    </Popover>
+  );
   const modifyAppointmentStatus = (e: any, id: any, status: any) => {
     e.preventDefault();
     dispatch(updateAppointmentStatus({ status: !status, id }));
   };
 
-  const sortByAlphabetic = () => {
-    const sortAppointmentList = appointmentList.sort((a: any, b: any) =>
-      getPatientName(a.patient_id) > getPatientName(b.patient_id) ? 1 : 0
-    );
-    console.log(sortAppointmentList);
-    setAppointmentList(sortAppointmentList);
-  };
   return (
     <div className="appointments">
       <AlertModal
@@ -243,86 +225,33 @@ const Appointment = () => {
       />
 
       <RegisterPatientModal
-        submitAddPatient={submitAddPatient}
         handleCloseRegisterPatients={handleCloseRegisterPatients}
         showRegisterPatients={showRegisterPatients}
-        handleChangePatientDate={handleChangePatientDate}
-        changePatientForm={changePatientForm}
-        patientForm={patientForm}
       />
 
       <ShowDetailPatientModal
-        appointmentForm={appointmentForm}
         appointmentId={appointmentId}
         setShowDetailAppointment={setShowDetailAppointment}
         showDetailAppointment={showDetailAppointment}
         dateAppointmentForm={dateAppointmentForm}
-        patientName={getPatientName(appointmentFormDetail.patient_id)}
-        changeAppointmentTime={changeAppointmentTime}
+        upDateAppointmentTime={upDateAppointmentTime}
         submitAddAppointment={submitAddAppointment}
         appointmentFormDetail={appointmentFormDetail}
-        handleChangeAppointmentDate={handleChangeAppointmentDate}
-        changeAppointmentForm={changeAppointmentForm}
+        handleUpdateAppointmentDate={handleUpdateAppointmentDate}
       />
 
-      <Modal
-        show={showRegisterAppointment}
-        className="modal-modify-supply"
-        onHide={handleCloseRegisterAppointment}
-        backdrop="static"
-      >
-        <Modal.Header closeButton>
-          <Modal.Title>Add Appointment</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          <Form onSubmit={submitAddAppointment} autoComplete="off">
-            <Form.Group className="mb-3" controlId="formBasicEmail">
-              <Form.Label>Patient</Form.Label>
-              <DropDownFilter
-                items={appointment.patients}
-                appointmentFormPatient={setAppointmentForm}
-              />
-            </Form.Group>
+      <AddAppointmentModal
+        showRegisterAppointment={showRegisterAppointment}
+        handleCloseRegisterAppointment={handleCloseRegisterAppointment}
+        submitAddAppointment={submitAddAppointment}
+        handleChangeAppointmentDate={handleChangeAppointmentDate}
+        changeAppointmentForm={changeAppointmentForm}
+        changeAppointmentTime={changeAppointmentTime}
+        appointment={appointment}
+        appointmentForm={appointmentForm}
+        setAppointmentForm={setAppointmentForm}
+      />
 
-            <Form.Group className="mb-3" controlId="formBasicEmail">
-              <Form.Label>Date</Form.Label>
-              <DatePicker
-                onChange={handleChangeAppointmentDate}
-                value={appointmentForm.date}
-                className="filter-input patient-form"
-                placeholderText="Enter your appointment date"
-              />
-            </Form.Group>
-            <Form.Group className="mb-3" controlId="formBasicEmail">
-              <Form.Label>Time</Form.Label>
-              <TimePicker
-                disableClock
-                className="appointment-time"
-                amPmAriaLabel={"Select am/pm"}
-                onChange={changeAppointmentTime}
-                value={appointmentForm.time}
-              />
-            </Form.Group>
-            <Form.Group className="mb-3" controlId="formBasicEmail">
-              <Form.Label>Reason</Form.Label>
-              <Form.Control
-                as="textarea"
-                onChange={changeAppointmentForm}
-                value={appointmentForm.reason}
-                className="form-input-add-supply"
-                placeholder="Enter a reason of the appointment"
-                name="reason"
-                style={{ height: "100px" }}
-              />
-            </Form.Group>
-
-            <Button type="submit" className="add-appointment-btn">
-              Add Appointment
-              <AiOutlineUserAdd style={{ marginLeft: "5px" }} size={20} />
-            </Button>
-          </Form>
-        </Modal.Body>
-      </Modal>
       <Table borderless hover className="inventory-table">
         <thead>
           <tr>
@@ -355,6 +284,19 @@ const Appointment = () => {
               />
             </th>
             <th>
+              <OverlayTrigger
+                trigger="click"
+                placement="right"
+                overlay={popoverMapKey}
+              >
+                <Button variant="info">
+                  {" "}
+                  Date Color Key <IoMdColorPalette />
+                </Button>
+              </OverlayTrigger>
+            </th>
+
+            <th>
               <Form.Select
                 onChange={statusFilter}
                 className="filter-input status-filter"
@@ -362,15 +304,6 @@ const Appointment = () => {
                 <option value={1}>Open Appointments</option>
                 <option value={0}>Close Appointments </option>
               </Form.Select>
-            </th>
-            <th>
-              <Button className="add-patients" onClick={sortByAlphabetic}>
-                Sort
-                <AiOutlineSortDescending
-                  style={{ marginLeft: "5px" }}
-                  size={20}
-                />
-              </Button>
             </th>
           </tr>
         </thead>
@@ -386,7 +319,21 @@ const Appointment = () => {
             return (
               <tr key={v.id}>
                 <td>{getPatientName(v.patient_id)}</td>
-                <td>{v.date}</td>
+                <td>
+                  <span
+                    className={`${
+                      v.date === todayDate
+                        ? "appointment-remainder today"
+                        : "" || new Date(v.date) < new Date(todayDate)
+                        ? "appointment-remainder late"
+                        : "" || new Date(v.date) > new Date(todayDate)
+                        ? "appointment-remainder soon"
+                        : ""
+                    } `}
+                  >
+                    {v.date}{" "}
+                  </span>
+                </td>
                 <td>{v.time}</td>
                 <td>
                   <div>
@@ -399,25 +346,21 @@ const Appointment = () => {
                   </div>
                 </td>
                 <td>
-                  <div>
-                    {" "}
-                    <Button
-                      onClick={(e) =>
-                        modifyAppointmentStatus(e, v.id, v.status)
-                      }
-                      className={v.status ? "close-btn" : "open-btn"}
-                    >
-                      {v.status ? (
-                        <span>
-                          Close Appointment <BsFillLockFill size={20} />
-                        </span>
-                      ) : (
-                        <span>
-                          Open Appointment <BsFillUnlockFill size={20} />
-                        </span>
-                      )}{" "}
-                    </Button>
-                  </div>
+                  {" "}
+                  <Button
+                    onClick={(e) => modifyAppointmentStatus(e, v.id, v.status)}
+                    className={v.status ? "close-btn" : "open-btn"}
+                  >
+                    {v.status ? (
+                      <span>
+                        Close Appointment <BsFillLockFill size={20} />
+                      </span>
+                    ) : (
+                      <span>
+                        Open Appointment <BsFillUnlockFill size={20} />
+                      </span>
+                    )}{" "}
+                  </Button>
                 </td>
               </tr>
             );

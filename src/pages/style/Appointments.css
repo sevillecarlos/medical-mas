@@ -60,10 +60,13 @@
   padding: 15px;
   width: 20%;
   text-align: center;
-  color: aliceblue;
+  color: rgb(0, 0, 0);
+  box-shadow: 1px 0px 14px 0px rgba(0, 0, 0, 0.36);
+  -webkit-box-shadow: 1px 0px 14px 0px rgba(0, 0, 0, 0.36);
+  -moz-box-shadow: 1px 0px 14px 0px rgba(0, 0, 0, 0.36);
 }
 .open-status {
-  background-color: rgba(0, 128, 0, 0.774);
+  background-color: rgba(9, 243, 9, 0.774);
 }
 
 .close-status {
@@ -156,4 +159,50 @@
 
 .error-name {
   color: rgba(255, 0, 0, 0.562) !important;
+}
+.appointment-remainder {
+  box-shadow: 1px 0px 14px 0px rgba(0, 0, 0, 0.36);
+  -webkit-box-shadow: 1px 0px 14px 0px rgba(0, 0, 0, 0.36);
+  -moz-box-shadow: 1px 0px 14px 0px rgba(0, 0, 0, 0.36);
+  padding: 10px;
+  border-radius: 50px !important;
+}
+.today {
+  background-color: greenyellow !important;
+}
+.late {
+  background-color: rgb(255, 47, 47) !important;
+}
+.soon {
+  background-color: rgb(241, 255, 47) !important;
+}
+#popover-patient-info {
+  background-color: rgb(255, 255, 255) !important;
+  padding: 0.3%;
+  border-radius: 20px;
+  box-shadow: 1px 0px 14px 0px rgba(0, 0, 0, 0.36);
+  -webkit-box-shadow: 1px 0px 14px 0px rgba(0, 0, 0, 0.36);
+  -moz-box-shadow: 1px 0px 14px 0px rgba(0, 0, 0, 0.36);
+}
+#popover-patient-info label {
+  font-size: 1vw;
+}
+#popover-patient-info h5 {
+  font-size: 0.9vw;
+}
+#popover-color-map-key {
+  background-color: rgba(255, 255, 255, 0.938) !important;
+  padding: 0.2%;
+  border-radius: 30px;
+  box-shadow: 1px 0px 14px 0px rgba(0, 0, 0, 0.36);
+  -webkit-box-shadow: 1px 0px 14px 0px rgba(0, 0, 0, 0.36);
+  -moz-box-shadow: 1px 0px 14px 0px rgba(0, 0, 0, 0.36);
+}
+
+#popover-color-map-key p {
+  font-size: 1vw;
+}
+
+.show-patient-info{
+  background-color: rgb(248, 190, 0) !important;
 }

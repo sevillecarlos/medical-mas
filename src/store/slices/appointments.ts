@@ -68,7 +68,6 @@ export const createAppointments = createAsyncThunk(
 export const updateAppointments = createAsyncThunk(
   "auth/updateAppointments",
   async (appointmentsData: any) => {
-    console.log(appointmentsData);
     try {
       const res = axios.put(
         `http://127.0.0.1:5000/api/v1/appointments/${appointmentsData.id}`,

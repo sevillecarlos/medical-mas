@@ -1,8 +1,10 @@
 import React, { useState } from "react";
-import { Button, Form, Modal } from "react-bootstrap";
+import { Button, Form, Modal, Popover, OverlayTrigger } from "react-bootstrap";
 import RemoveConfModal from "../ui/RemoveConfModal";
 import PropTypes from "prop-types";
 import { MdDelete } from "react-icons/md";
+import { BiMessageRoundedDetail } from "react-icons/bi";
+
 import { AiOutlineEdit } from "react-icons/ai";
 import DatePicker from "react-datepicker";
 import TimePicker from "react-time-picker";
@@ -14,42 +16,40 @@ import {
 import { useDispatch } from "react-redux";
 
 interface ShowDetailPatient {
-  appointmentForm: object;
-  appointmentId: number|null;
+  appointmentId: number | null;
   setShowDetailAppointment: (e: any) => void;
   submitAddAppointment: (e: any) => void;
   showDetailAppointment: boolean;
   dateAppointmentForm: any;
   appointmentFormDetail: any;
-  patientName: string;
-  handleChangeAppointmentDate: (e: any) => void;
-  changeAppointmentTime: (e: any) => void;
-  changeAppointmentForm: (e: any) => void;
+  handleUpdateAppointmentDate: (e: any) => void;
+  upDateAppointmentTime: (e: any) => void;
 }
 
 const ShowDetailPatientModal = (props: ShowDetailPatient) => {
   const {
-    appointmentForm,
     appointmentId,
     setShowDetailAppointment,
     showDetailAppointment,
     dateAppointmentForm,
-    patientName,
-    changeAppointmentTime,
+    upDateAppointmentTime,
     submitAddAppointment,
     appointmentFormDetail,
-    handleChangeAppointmentDate,
-    changeAppointmentForm,
+    handleUpdateAppointmentDate,
   } = props;
+  
 
   const dispatch = useDispatch();
+  
 
   const [showRemoveModal, setShowRemoveModal] = useState(false);
-
   const [showModifyAppointment, setShowModifyAppointment] = useState(false);
+
   const modifyAppointment = (e: any) => {
     e.preventDefault();
-    dispatch(updateAppointments({ ...appointmentForm, id: appointmentId }));
+    dispatch(
+      updateAppointments({ ...appointmentFormDetail, id: appointmentId })
+    );
     setShowDetailAppointment(false);
     setShowModifyAppointment(false);
   };
@@ -67,7 +67,28 @@ const ShowDetailPatientModal = (props: ShowDetailPatient) => {
     setShowDetailAppointment(false);
     setShowModifyAppointment(false);
   };
-
+  const popoverPatientInfo = (
+    <Popover id="popover-patient-info">
+      <Popover.Body>
+        <Form.Group className="mb-3">
+          <Form.Label>Phone Number</Form.Label>
+          <h5> {dateAppointmentForm.phone_number} </h5>
+        </Form.Group>
+        <Form.Group className="mb-3">
+          <Form.Label>Gender</Form.Label>
+          <h5> {dateAppointmentForm.patient_gender} </h5>
+        </Form.Group>
+        <Form.Group className="mb-3">
+          <Form.Label>Address</Form.Label>
+          <h5> {dateAppointmentForm.address} </h5>
+        </Form.Group>
+        <Form.Group className="mb-3">
+          <Form.Label>BirthDay</Form.Label>
+          <h5> {dateAppointmentForm.birth_date} </h5>
+        </Form.Group>
+      </Popover.Body>
+    </Popover>
+  );
   return (
     <Modal
       show={showDetailAppointment}
@@ -97,14 +118,28 @@ const ShowDetailPatientModal = (props: ShowDetailPatient) => {
           </Form.Group>
           <Form.Group className="mb-3" controlId="formBasicEmail">
             <Form.Label>Patient</Form.Label>
-            <h5>{patientName}</h5>
+            <h5>
+              {dateAppointmentForm.first_name} {dateAppointmentForm.last_name}
+            </h5>
           </Form.Group>
           {!showModifyAppointment ? (
             <>
               {" "}
               <Form.Group className="mb-3" controlId="formBasicEmail">
                 <Form.Label>Patient Id Number</Form.Label>
-                <h5>{dateAppointmentForm.patient_id_number}</h5>
+                <h5>{dateAppointmentForm.patient_id}</h5>
+              </Form.Group>
+              <Form.Group className="mb-3" controlId="formBasicEmail">
+                <OverlayTrigger
+                  trigger="click"
+                  placement="right"
+                  overlay={popoverPatientInfo}
+                >
+                  <Button className="show-patient-info">
+                    {" "}
+                    Show patient information <BiMessageRoundedDetail />
+                  </Button>
+                </OverlayTrigger>
               </Form.Group>
               <Form.Group className="mb-3" controlId="formBasicEmail">
                 <Form.Label>Date</Form.Label>
@@ -120,7 +155,9 @@ const ShowDetailPatientModal = (props: ShowDetailPatient) => {
               </Form.Group>
               <Form.Group className="mb-3" controlId="formBasicEmail">
                 <Form.Label>Created at:</Form.Label>
-                <h5>{dateAppointmentForm.created_at}</h5>
+                <h5>
+                  {new Date(dateAppointmentForm.created_at).toLocaleString()}
+                </h5>
               </Form.Group>
             </>
           ) : (
@@ -128,7 +165,7 @@ const ShowDetailPatientModal = (props: ShowDetailPatient) => {
               <Form.Group className="mb-3" controlId="formBasicEmail">
                 <Form.Label>Date</Form.Label>
                 <DatePicker
-                  onChange={handleChangeAppointmentDate}
+                  onChange={handleUpdateAppointmentDate}
                   value={appointmentFormDetail.date}
                   className="filter-input patient-form"
                   placeholderText="Enter your appointment date"
@@ -140,20 +177,8 @@ const ShowDetailPatientModal = (props: ShowDetailPatient) => {
                   disableClock
                   className="appointment-time"
                   amPmAriaLabel={"Select am/pm"}
-                  onChange={changeAppointmentTime}
+                  onChange={upDateAppointmentTime}
                   value={appointmentFormDetail.time}
-                />
-              </Form.Group>
-              <Form.Group className="mb-3" controlId="formBasicEmail">
-                <Form.Label>Reason</Form.Label>
-                <Form.Control
-                  as="textarea"
-                  onChange={changeAppointmentForm}
-                  className="form-input-add-supply"
-                  placeholder="Enter a reason of the appointment"
-                  name="reason"
-                  value={appointmentFormDetail.reason}
-                  style={{ height: "90px" }}
                 />
               </Form.Group>
             </>
@@ -192,17 +217,14 @@ const ShowDetailPatientModal = (props: ShowDetailPatient) => {
 };
 
 ShowDetailPatientModal.propTypes = {
-  appointmentForm: PropTypes.object.isRequired,
   appointmentId: PropTypes.number.isRequired,
   setShowDetailAppointment: PropTypes.func.isRequired,
   showDetailAppointment: PropTypes.bool.isRequired,
   dateAppointmentForm: PropTypes.object.isRequired,
-  patientName: PropTypes.string.isRequired,
-  changeAppointmentTime: PropTypes.func.isRequired,
+  upDateAppointmentTime: PropTypes.func.isRequired,
   submitAddAppointment: PropTypes.func.isRequired,
   appointmentFormDetail: PropTypes.object.isRequired,
-  handleChangeAppointmentDate: PropTypes.func.isRequired,
-  changeAppointmentForm: PropTypes.func.isRequired,
+  handleUpdateAppointmentDate: PropTypes.func.isRequired,
 };
 
 export default ShowDetailPatientModal;
