@@ -1,9 +1,6 @@
-@import url("https://fonts.googleapis.com/css2?family=Archivo:wght@100&display=swap");
-
 .title-brand {
   text-align: center;
   color: cornflowerblue;
-  font-family: "Archivo", sans-serif;
   font-weight: bold;
 }
 .nav-bar {
@@ -13,24 +10,23 @@
   margin: auto;
   margin-top: 1%;
   position: absolute;
-
   box-shadow: 1px 0px 14px 0px rgba(0, 0, 0, 0.36);
   -webkit-box-shadow: 1px 0px 14px 0px rgba(0, 0, 0, 0.36);
   -moz-box-shadow: 1px 0px 14px 0px rgba(0, 0, 0, 0.36);
 }
-.logo-image {
-  width: 5vw;
-  margin-left: 10px;
+.nav-bar span {
+  font-size: 1.4vw;
+  color: rgb(79, 80, 82);
+  text-align: center !important;
 }
-
-.brand-title {
-  font-size: 70px;
-  margin-left: 475px;
+.logo-image {
+  width: 4.5vw;
+  margin-left: 10px;
 }
 
 .user-dropdown {
   margin-left: 20vw;
-  font-size: 1vw !important;
+  font-size: 1.3vw !important;
   color: black !important;
   position: relative;
 }
@@ -55,4 +51,63 @@
 .suggestion-username-btn {
   border-radius: 20px !important;
   background-color: rgb(255, 255, 255) !important;
+}
+
+/*******************************************************/
+/* Big tablets to 1200px*/
+/* @media only screen and (max-width: 1200px) {
+} */
+
+/* Small tablets to big tablets: from 768 to 1032*/
+/* @media only screen and (max-width: 1032px) {
+} */
+
+/* Small phones to small tablets: from 481 to 767*/
+@media only screen and (max-width: 767px) {
+}
+
+/*Small Phone from 0 to 480px*/
+@media only screen and (max-width: 400px) {
+  .nav-bar {
+    width: 90%;
+    margin-top: 10%;
+  }
+  .nav-bar span {
+    font-size: 3.5vw !important;
+    color: rgb(79, 80, 82);
+    text-align: center !important;
+  }
+  .logo-image {
+    width: 10vw;
+    margin-left: 10px;
+  }
+
+  .user-dropdown {
+    margin-left: 20vw;
+    font-size: 1vw !important;
+    color: black !important;
+    position: relative;
+  }
+  .form-input-add-user {
+    border-radius: 20px !important;
+    box-shadow: 1px 0px 14px 0px rgba(0, 0, 0, 0.36);
+    -webkit-box-shadow: 1px 0px 14px 0px rgba(0, 0, 0, 0.36);
+    -moz-box-shadow: 1px 0px 14px 0px rgba(0, 0, 0, 0.36);
+  }
+
+  .add-user-btn {
+    background-color: rgba(148, 255, 127, 0.452) !important;
+    border-radius: 20px !important;
+    width: 100%;
+  }
+  .badge-user {
+    color: black !important;
+    margin-left: 5px;
+    font-size: 19px !important;
+    font-weight: bold;
+  }
+  .suggestion-username-btn {
+    border-radius: 20px !important;
+    background-color: rgb(255, 255, 255) !important;
+  }
 }

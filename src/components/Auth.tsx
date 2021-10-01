@@ -36,16 +36,9 @@ const Auth = () => {
   return (
     <div className="auth">
       <Card className="card-auth">
-        <Card.Title style={{ fontSize: "30px", color: "rgb(36, 28, 28)" }}>
-          Sign In
-        </Card.Title>
-        <Card.Img
-          style={{ width: "100px", margin: "auto" }}
-          variant="top"
-          src={logo}
-        />
+        <Card.Img variant="top" src={logo} />
         <Card.Body>
-          <Form onSubmit={signIn}>
+          <Form onSubmit={signIn} autoComplete="off">
             <Form.Select
               className="user-type-select"
               aria-label="Default select example"
@@ -56,7 +49,7 @@ const Auth = () => {
               <option value="admin">Administrator</option>
             </Form.Select>
             <Form.Group className="mb-3" controlId="formBasicEmailSignIn">
-              <Form.Label>Username</Form.Label>
+              <Form.Label className='auth-label'>Username</Form.Label>
               <Form.Control
                 name="username"
                 type="text"
@@ -67,7 +60,7 @@ const Auth = () => {
             </Form.Group>
 
             <Form.Group className="mb-3" controlId="formBasicPasswordSignIn">
-              <Form.Label>Password</Form.Label>
+              <Form.Label className='auth-label'>Password</Form.Label>
               <Form.Control
                 name="password"
                 className="input-auth"
@@ -76,9 +69,9 @@ const Auth = () => {
                 placeholder="Enter password"
               />
             </Form.Group>
-            {auth.error !== null && <span>{auth.error}</span>}
+            {auth.error !== null && <span className='error-msg'>{auth.error}</span>}
             <Button className="auth-btn" type="submit">
-              Login <MdKeyboardArrowRight size={25} />
+              Login <MdKeyboardArrowRight />
             </Button>
           </Form>
         </Card.Body>

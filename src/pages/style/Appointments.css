@@ -2,7 +2,7 @@
   background-color: rgba(127, 255, 212, 0.39) !important;
 }
 .date-filter {
-  width: 60% !important;
+  width: 70% !important;
   border: none;
   padding: 5px;
   text-align: center;
@@ -31,7 +31,8 @@
   background-color: rgba(8, 252, 69, 0.493) !important;
 }
 .show-detail-btn {
-  background-color: rgba(137, 43, 226, 0.493) !important;
+  background-color: rgba(52, 238, 129, 0.171) !important;
+  color: aliceblue !;
 }
 
 .edit-btn {
@@ -86,15 +87,21 @@
 .btn {
   border: none !important;
   border-radius: 20px !important;
-  color: rgb(7, 7, 7) !important;
+  font-size: 1vw !important;
+  color: rgb(34, 32, 32) !important;
   background-color: rgba(172, 255, 47, 0.521);
   box-shadow: 1px 0px 14px 0px rgba(0, 0, 0, 0.36);
   -webkit-box-shadow: 1px 0px 14px 0px rgba(0, 0, 0, 0.36);
   -moz-box-shadow: 1px 0px 14px 0px rgba(0, 0, 0, 0.36);
 }
+td {
+  font-size: 1vw !important;
+}
 
 .filter-input {
-  width: 100% !important;
+  width: 80% !important;
+  font-size: 1vw !important;
+  text-align: center !important;
   border-radius: 20px !important;
   box-shadow: 1px 0px 14px 0px rgba(0, 0, 0, 0.36);
   -webkit-box-shadow: 1px 0px 14px 0px rgba(0, 0, 0, 0.36);
@@ -168,13 +175,16 @@
   border-radius: 50px !important;
 }
 .today {
-  background-color: greenyellow !important;
+  background-color: rgba(172, 255, 47, 0.452) !important;
 }
 .late {
-  background-color: rgb(255, 47, 47) !important;
+  background-color: rgba(255, 47, 47, 0.404) !important;
 }
 .soon {
-  background-color: rgb(241, 255, 47) !important;
+  background-color: rgba(241, 255, 47, 0.26) !important;
+}
+.color-key-btn{
+  background-color: rgba(95, 158, 160, 0.521) !important;
 }
 #popover-patient-info {
   background-color: rgb(255, 255, 255) !important;
@@ -203,6 +213,23 @@
   font-size: 1vw;
 }
 
-.show-patient-info{
+.show-patient-info {
   background-color: rgb(248, 190, 0) !important;
+}
+
+/*******************************************************/
+/* Big tablets to 1200px*/
+/* @media only screen and (max-width: 1200px) {
+} */
+
+/* Small tablets to big tablets: from 768 to 1032*/
+/* @media only screen and (max-width: 1032px) {
+} */
+
+/* Small phones to small tablets: from 481 to 767*/
+@media only screen and (max-width: 767px) {
+}
+
+/*Small Phone from 0 to 480px*/
+@media only screen and (max-width: 400px) {
 }

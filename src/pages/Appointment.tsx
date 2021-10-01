@@ -5,7 +5,7 @@ import { AiOutlineUserAdd } from "react-icons/ai";
 import { BiCommentDetail } from "react-icons/bi";
 import DatePicker from "react-datepicker";
 import { BsFillUnlockFill, BsFillLockFill } from "react-icons/bs";
-import { IoMdColorPalette } from "react-icons/io";
+import { IoMdColorFill } from "react-icons/io";
 
 import { RootStateOrAny, useDispatch, useSelector } from "react-redux";
 //MODALS
@@ -201,17 +201,29 @@ const Appointment = () => {
         appointment={appointment}
       />
 
-      <Table borderless hover className="inventory-table">
+      <Table borderless hover responsive className="inventory-table">
         <thead>
           <tr>
+            <th>
+              <OverlayTrigger
+                trigger="click"
+                placement="right"
+                overlay={popoverMapKey}
+              >
+                <Button className="color-key-btn">
+                  {" "}
+                  Color Key <IoMdColorFill />
+                </Button>
+              </OverlayTrigger>
+            </th>
             <th>
               {" "}
               <Button
                 className="add-appointment"
                 onClick={() => setShowRegisterAppointment(true)}
               >
-                Register Appointements
-                <GrFormAdd style={{ marginLeft: "5px" }} size={20} />
+                Register Appointments
+                <GrFormAdd />
               </Button>
             </th>
             <th>
@@ -221,7 +233,7 @@ const Appointment = () => {
                 onClick={() => setShowRegisterPatients(true)}
               >
                 Register Patients
-                <AiOutlineUserAdd style={{ marginLeft: "5px" }} size={20} />
+                <AiOutlineUserAdd />
               </Button>
             </th>
             <th>
@@ -232,42 +244,29 @@ const Appointment = () => {
                 placeholderText="Select date to filter"
               />
             </th>
-            <th>
-              <OverlayTrigger
-                trigger="click"
-                placement="right"
-                overlay={popoverMapKey}
-              >
-                <Button variant="info">
-                  {" "}
-                  Date Color Key <IoMdColorPalette />
-                </Button>
-              </OverlayTrigger>
-            </th>
 
             <th>
               <Form.Select
                 onChange={statusFilter}
                 className="filter-input status-filter"
               >
-                <option value={1}>Open Appointments</option>
-                <option value={0}>Close Appointments </option>
+                <option value={1}>Open </option>
+                <option value={0}>Close </option>
               </Form.Select>
             </th>
           </tr>
         </thead>
         <tbody>
           <tr className="sub-header-inventory-table">
+            <td>Date</td>
+            <td>Time</td>
             <td>Patient Name</td>
-            <td>Appointment Date</td>
-            <td>Appointment Time</td>
             <td>More Info</td>
-            <td>Action</td>
+            <td>Appointment Status</td>
           </tr>
           {appointmentList.map((v: any) => {
             return (
               <tr key={v.id}>
-                <td>{getPatientName(v.patient_id)}</td>
                 <td>
                   <span
                     className={`${
@@ -284,6 +283,8 @@ const Appointment = () => {
                   </span>
                 </td>
                 <td>{v.time}</td>
+                <td>{getPatientName(v.patient_id)}</td>
+
                 <td>
                   <div>
                     <Button
@@ -302,11 +303,11 @@ const Appointment = () => {
                   >
                     {v.status ? (
                       <span>
-                        Close Appointment <BsFillLockFill size={20} />
+                        Close <BsFillLockFill />
                       </span>
                     ) : (
                       <span>
-                        Open Appointment <BsFillUnlockFill size={20} />
+                        Open <BsFillUnlockFill />
                       </span>
                     )}{" "}
                   </Button>

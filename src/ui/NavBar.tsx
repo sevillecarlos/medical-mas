@@ -223,8 +223,8 @@ const NavBar = () => {
 
       <Navbar className="nav-bar">
         <Navbar.Brand href="/">
-          <Image src={logo} className="logo-image" rounded /> Medical
-          Appointment System
+          <Image src={logo} className="logo-image" rounded /> <span>Medical
+          Appointment System</span>
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
