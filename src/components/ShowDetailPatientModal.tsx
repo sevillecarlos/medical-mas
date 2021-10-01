@@ -18,7 +18,6 @@ import { useDispatch } from "react-redux";
 interface ShowDetailPatient {
   appointmentId: number | null;
   setShowDetailAppointment: (e: any) => void;
-  submitAddAppointment: (e: any) => void;
   showDetailAppointment: boolean;
   dateAppointmentForm: any;
   appointmentFormDetail: any;
@@ -33,14 +32,11 @@ const ShowDetailPatientModal = (props: ShowDetailPatient) => {
     showDetailAppointment,
     dateAppointmentForm,
     upDateAppointmentTime,
-    submitAddAppointment,
     appointmentFormDetail,
     handleUpdateAppointmentDate,
   } = props;
-  
 
   const dispatch = useDispatch();
-  
 
   const [showRemoveModal, setShowRemoveModal] = useState(false);
   const [showModifyAppointment, setShowModifyAppointment] = useState(false);
@@ -105,7 +101,7 @@ const ShowDetailPatientModal = (props: ShowDetailPatient) => {
         <Modal.Title>Appointment Detail</Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        <Form onSubmit={submitAddAppointment} autoComplete="off">
+        <Form onSubmit={modifyAppointment}>
           <Form.Group className="mb-3" controlId="formBasicEmail">
             <Form.Label>Apppointment Status</Form.Label>
             <div
@@ -194,7 +190,7 @@ const ShowDetailPatientModal = (props: ShowDetailPatient) => {
               </Button>
             ) : (
               <>
-                <Button onClick={modifyAppointment} className="edit-btn">
+                <Button type="submit" className="edit-btn">
                   Modify appointment
                   <AiOutlineEdit style={{ marginLeft: "5px" }} size={20} />
                 </Button>
@@ -222,7 +218,6 @@ ShowDetailPatientModal.propTypes = {
   showDetailAppointment: PropTypes.bool.isRequired,
   dateAppointmentForm: PropTypes.object.isRequired,
   upDateAppointmentTime: PropTypes.func.isRequired,
-  submitAddAppointment: PropTypes.func.isRequired,
   appointmentFormDetail: PropTypes.object.isRequired,
   handleUpdateAppointmentDate: PropTypes.func.isRequired,
 };

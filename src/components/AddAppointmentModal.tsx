@@ -1,8 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import { Button, Form, Modal } from "react-bootstrap";
 import DatePicker from "react-datepicker";
 import PropTypes from "prop-types";
 import TimePicker from "react-time-picker";
+import { useDispatch } from "react-redux";
+import { createAppointments } from "../store/slices/appointments";
 
 import { AiOutlineUserAdd } from "react-icons/ai";
 
@@ -11,28 +13,55 @@ import DropDownFilter from "../ui/DropDownFilter";
 interface AddAppointmentModalI {
   showRegisterAppointment: boolean;
   handleCloseRegisterAppointment: () => void;
-  submitAddAppointment: (e: any) => void;
-  handleChangeAppointmentDate: (e: any) => void;
-  changeAppointmentForm: (e: any) => void;
-  changeAppointmentTime: (e: any) => void;
-  appointment: any;
-  appointmentForm: any;
-  setAppointmentForm: (e: any) => void;
+  appointment: { patients: Array<number | string> };
 }
 
 const AddAppointmentModal = (props: AddAppointmentModalI) => {
   const {
     showRegisterAppointment,
     handleCloseRegisterAppointment,
-    submitAddAppointment,
-    handleChangeAppointmentDate,
-    changeAppointmentForm,
-    changeAppointmentTime,
     appointment,
-    appointmentForm,
-    setAppointmentForm,
   } = props;
+  const dispatch = useDispatch();
 
+  const [appointmentForm, setAppointmentForm] = useState({
+    patient_id: 0,
+    date: "",
+    time: "",
+    reason: "",
+    status: true,
+  });
+
+  const submitAddAppointment = (e: any) => {
+    e.preventDefault();
+    setAppointmentForm({
+      patient_id: 0,
+      date: "",
+      time: "",
+      reason: "",
+      status: true,
+    });
+    dispatch(createAppointments(appointmentForm));
+    handleCloseRegisterAppointment();
+  };
+
+  const changeAppointmentForm = (e: any) => {
+    setAppointmentForm((prevState: any) => {
+      return { ...prevState, [e.target.name]: e.target.value };
+    });
+  };
+
+  const changeAppointmentTime = (e: any) =>
+    setAppointmentForm((prevState: any) => {
+      return { ...prevState, time: e };
+    });
+  const handleChangeAppointmentDate = (date: any) => {
+    setAppointmentForm((prevState: any) => {
+      const formatDate = new Date(date).toLocaleDateString();
+
+      return { ...prevState, date: formatDate };
+    });
+  };
   return (
     <Modal
       show={showRegisterAppointment}
@@ -97,14 +126,8 @@ const AddAppointmentModal = (props: AddAppointmentModalI) => {
 
 AddAppointmentModal.propTypes = {
   showRegisterAppointment: PropTypes.bool.isRequired,
-  // handleCloseRegisterAppointment: () => void;
-  // submitAddAppointment: (e: any) => void;
-  // handleChangeAppointmentDate: (e: any) => void;
-  // changeAppointmentForm: (e: any) => void;
-  // changeAppointmentTime: (e: any) => void;
-  // appointment: any;
-  // appointmentForm: any;
-  // setAppointmentForm: (e: any) => void;
+  handleCloseRegisterAppointment: PropTypes.func.isRequired,
+  appointment: PropTypes.array.isRequired,
 };
 
 export default AddAppointmentModal;

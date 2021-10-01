@@ -17,7 +17,6 @@ import {
   getPatients,
   appointmentAction,
   getAppointments,
-  createAppointments,
   updateAppointmentStatus,
 } from "../store/slices/appointments";
 
@@ -32,14 +31,6 @@ const Appointment = () => {
 
   const appointment = useSelector((state: RootStateOrAny) => state.appointment);
 
-
-  const handleChangeAppointmentDate = (date: string) => {
-    setAppointmentForm((prevState: any) => {
-      const formatDate = new Date(date).toLocaleDateString();
-
-      return { ...prevState, date: formatDate };
-    });
-  };
   const handleUpdateAppointmentDate = (date: string) => {
     setAppointmentFormDetail((prevState: any) => {
       const formatDate = new Date(date).toLocaleDateString();
@@ -60,16 +51,6 @@ const Appointment = () => {
 
   const [appointmentId, setAppointmentId] = useState(null);
 
-
-
-  const [appointmentForm, setAppointmentForm] = useState({
-    patient_id: 0,
-    date: "",
-    time: "",
-    reason: "",
-    status: true,
-  });
-
   const [appointmentFormDetail, setAppointmentFormDetail] = useState({
     patient_id: 0,
     date: "",
@@ -81,7 +62,6 @@ const Appointment = () => {
   const [dateAppointmentForm, setDateAppointmentForm] = useState({});
 
   const [appointmentList, setAppointmentList] = useState(Array<any>());
-
 
   const statusFilter = (e?: any) => {
     const filterValue = e?.target.value ? e.target.value : 1;
@@ -126,26 +106,6 @@ const Appointment = () => {
     }
   }, [appointment.reload, dispatch]);
 
-
-  const submitAddAppointment = (e: any) => {
-    e.preventDefault();
-    setAppointmentForm({
-      patient_id: 0,
-      date: "",
-      time: "",
-      reason: "",
-      status: true,
-    });
-    dispatch(createAppointments(appointmentForm));
-    handleCloseRegisterAppointment();
-  };
-
-  const changeAppointmentForm = (e: any) => {
-    setAppointmentForm((prevState: any) => {
-      return { ...prevState, [e.target.name]: e.target.value };
-    });
-  };
-
   const getPatientName = (id: number) => {
     const name = appointment.patients?.filter(
       (v: any) => Number(v.id) === Number(id)
@@ -154,10 +114,6 @@ const Appointment = () => {
     return `${name?.first_name} ${name?.last_name}`;
   };
 
-  const changeAppointmentTime = (e: any) =>
-    setAppointmentForm((prevState: any) => {
-      return { ...prevState, time: e };
-    });
   const upDateAppointmentTime = (e: any) =>
     setAppointmentFormDetail((prevState: any) => {
       return { ...prevState, time: e };
@@ -235,7 +191,6 @@ const Appointment = () => {
         showDetailAppointment={showDetailAppointment}
         dateAppointmentForm={dateAppointmentForm}
         upDateAppointmentTime={upDateAppointmentTime}
-        submitAddAppointment={submitAddAppointment}
         appointmentFormDetail={appointmentFormDetail}
         handleUpdateAppointmentDate={handleUpdateAppointmentDate}
       />
@@ -243,13 +198,7 @@ const Appointment = () => {
       <AddAppointmentModal
         showRegisterAppointment={showRegisterAppointment}
         handleCloseRegisterAppointment={handleCloseRegisterAppointment}
-        submitAddAppointment={submitAddAppointment}
-        handleChangeAppointmentDate={handleChangeAppointmentDate}
-        changeAppointmentForm={changeAppointmentForm}
-        changeAppointmentTime={changeAppointmentTime}
         appointment={appointment}
-        appointmentForm={appointmentForm}
-        setAppointmentForm={setAppointmentForm}
       />
 
       <Table borderless hover className="inventory-table">
