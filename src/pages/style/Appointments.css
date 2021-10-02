@@ -245,7 +245,9 @@ td {
 .show-patient-info {
   background-color: rgb(248, 190, 0) !important;
 }
-
+.react-time-picker__wrapper{
+  border: none !important;
+}
 /*******************************************************/
 /* Big tablets to 1200px*/
 /* @media only screen and (max-width: 1200px) {
