@@ -43,6 +43,8 @@ const Appointment = () => {
 
   const [showRegisterAppointment, setShowRegisterAppointment] = useState(false);
   const [showDetailAppointment, setShowDetailAppointment] = useState(false);
+  const [statusAppointment, setStatusAppointment] = useState(1);
+  const [filterDate, setFilterDate] = useState(null);
 
   const handleCloseRegisterPatients = () => setShowRegisterPatients(false);
 
@@ -64,12 +66,13 @@ const Appointment = () => {
   const [appointmentList, setAppointmentList] = useState(Array<any>());
 
   const statusFilter = (e?: any) => {
-    const filterValue = e?.target.value ? e.target.value : 1;
+    const filterValue = e?.target.value ? e.target.value : statusAppointment;
     const filterAppoinmentArr = appointment.appointments.filter(
       (appointment: { status: boolean }) => {
         return appointment.status == filterValue;
       }
     );
+    setStatusAppointment(e?.target.value ?? 1);
 
     const orderByDate = filterAppoinmentArr.sort(
       (a: { date: string }, b: { date: string }) =>
@@ -147,15 +150,14 @@ const Appointment = () => {
     });
   };
 
-  const [filterDate, setFilterDate] = useState(null);
-
   const handleChangeFilterDate = (date: any) => {
-    // setFilterDate(date);
-    // const formatDate = new Date(date).toLocaleDateString();
-    // const filterDateAppointments = appointmentList.filter(
-    //   (v: any) => v.date === formatDate
-    // );
-    // setAppointmentList(filterDateAppointments);
+    setFilterDate(date);
+    statusFilter();
+    const formatDate = new Date(date).toLocaleDateString();
+    const filterDateAppointments = appointmentList.filter(
+      (v: any) => v.date === formatDate
+    );
+    setAppointmentList(filterDateAppointments);
   };
 
   const popoverMapKey = (
