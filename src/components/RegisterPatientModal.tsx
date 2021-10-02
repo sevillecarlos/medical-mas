@@ -47,7 +47,7 @@ const RegisterPatientModal = (props: RegisterPatient) => {
   return (
     <Modal
       show={showRegisterPatients}
-      className="modal-modify-supply"
+      className="modal-register-patient"
       onHide={handleCloseRegisterPatients}
       backdrop="static"
     >
@@ -91,7 +91,7 @@ const RegisterPatientModal = (props: RegisterPatient) => {
             <DatePicker
               onChange={handleChangePatientDate}
               value={patientForm.birth_date}
-              className="filter-input patient-form"
+              className="date-input patient-form"
               placeholderText="Enter your birth day"
             />
           </Form.Group>
@@ -110,11 +110,11 @@ const RegisterPatientModal = (props: RegisterPatient) => {
           </Form.Group>
           <Form.Group className="mb-3">
             <Form.Label>Phone Number</Form.Label>
-            <InputGroup className="mb-3">
+            <InputGroup className="mb-3 phone-number-input">
               <InputGroup.Text className="text-phone-number">+</InputGroup.Text>
               <FormControl
                 placeholder="Enter your phone number"
-                className="form-input-phone"
+                className="form-input-add-supply "
                 name="phone_number"
                 onChange={changePatientForm}
               />
@@ -131,10 +131,12 @@ const RegisterPatientModal = (props: RegisterPatient) => {
               style={{ height: "90px" }}
             />
           </Form.Group>
-          <Button type="submit" className="add-patient-btn">
-            Add Patient
-            <AiOutlineUserAdd style={{ marginLeft: "5px" }} size={20} />
-          </Button>
+          <div className="modal-btn-container">
+            <Button type="submit" className="add-patient-btn modal-btn">
+              Add Patient
+              <AiOutlineUserAdd />
+            </Button>
+          </div>
         </Form>
       </Modal.Body>
     </Modal>

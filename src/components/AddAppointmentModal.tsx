@@ -87,7 +87,7 @@ const AddAppointmentModal = (props: AddAppointmentModalI) => {
             <DatePicker
               onChange={handleChangeAppointmentDate}
               value={appointmentForm.date}
-              className="filter-input patient-form"
+              className="date-input patient-form"
               placeholderText="Enter your appointment date"
             />
           </Form.Group>
@@ -113,11 +113,12 @@ const AddAppointmentModal = (props: AddAppointmentModalI) => {
               style={{ height: "100px" }}
             />
           </Form.Group>
-
-          <Button type="submit" className="add-appointment-btn">
-            Add Appointment
-            <AiOutlineUserAdd style={{ marginLeft: "5px" }} size={20} />
-          </Button>
+          <div className="modal-btn-container">
+            <Button type="submit" className="add-appointment-btn">
+              Add Appointment
+              <AiOutlineUserAdd style={{ marginLeft: "5px" }} size={20} />
+            </Button>
+          </div>
         </Form>
       </Modal.Body>
     </Modal>

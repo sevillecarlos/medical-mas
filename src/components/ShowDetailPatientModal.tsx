@@ -88,7 +88,7 @@ const ShowDetailPatientModal = (props: ShowDetailPatient) => {
   return (
     <Modal
       show={showDetailAppointment}
-      className="modal-modify-supply"
+      className="modal-show-detail-appointment"
       onHide={handleCloseDetailsAppointment}
       backdrop="static"
     >
@@ -98,11 +98,11 @@ const ShowDetailPatientModal = (props: ShowDetailPatient) => {
         onClickRemove={removeAppointment}
       />
       <Modal.Header closeButton>
-        <Modal.Title>Appointment Detail</Modal.Title>
+        <Modal.Title className="modal-title">Appointment Detail</Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        <Form onSubmit={modifyAppointment}>
-          <Form.Group className="mb-3" controlId="formBasicEmail">
+        <Form className="show-detail-appointment" onSubmit={modifyAppointment}>
+          <Form.Group className="mb-3">
             <Form.Label>Apppointment Status</Form.Label>
             <div
               className={`status-appointment ${
@@ -113,7 +113,7 @@ const ShowDetailPatientModal = (props: ShowDetailPatient) => {
             </div>
           </Form.Group>
           <Form.Group className="mb-3" controlId="formBasicEmail">
-            <Form.Label>Patient</Form.Label>
+            <Form.Label className="modal-label">Patient</Form.Label>
             <h5>
               {dateAppointmentForm.first_name} {dateAppointmentForm.last_name}
             </h5>
@@ -122,7 +122,9 @@ const ShowDetailPatientModal = (props: ShowDetailPatient) => {
             <>
               {" "}
               <Form.Group className="mb-3" controlId="formBasicEmail">
-                <Form.Label>Patient Id Number</Form.Label>
+                <Form.Label className="modal-label">
+                  Patient Id Number
+                </Form.Label>
                 <h5>{dateAppointmentForm.patient_id}</h5>
               </Form.Group>
               <Form.Group className="mb-3" controlId="formBasicEmail">
@@ -138,19 +140,19 @@ const ShowDetailPatientModal = (props: ShowDetailPatient) => {
                 </OverlayTrigger>
               </Form.Group>
               <Form.Group className="mb-3" controlId="formBasicEmail">
-                <Form.Label>Date</Form.Label>
+                <Form.Label className="modal-label">Date</Form.Label>
                 <h5>{appointmentFormDetail.date}</h5>
               </Form.Group>
               <Form.Group className="mb-3" controlId="formBasicEmail">
-                <Form.Label>Time</Form.Label>
+                <Form.Label className="modal-label">Time</Form.Label>
                 <h5>{appointmentFormDetail.time}</h5>
               </Form.Group>
               <Form.Group className="mb-3" controlId="formBasicEmail">
-                <Form.Label>Reason</Form.Label>
+                <Form.Label className="modal-label">Reason</Form.Label>
                 <h5>{appointmentFormDetail.reason}</h5>
               </Form.Group>
               <Form.Group className="mb-3" controlId="formBasicEmail">
-                <Form.Label>Created at:</Form.Label>
+                <Form.Label className="modal-label">Created at:</Form.Label>
                 <h5>
                   {new Date(dateAppointmentForm.created_at).toLocaleString()}
                 </h5>
@@ -163,7 +165,7 @@ const ShowDetailPatientModal = (props: ShowDetailPatient) => {
                 <DatePicker
                   onChange={handleUpdateAppointmentDate}
                   value={appointmentFormDetail.date}
-                  className="filter-input patient-form"
+                  className="date-input patient-form"
                   placeholderText="Enter your appointment date"
                 />
               </Form.Group>
@@ -183,16 +185,16 @@ const ShowDetailPatientModal = (props: ShowDetailPatient) => {
             !showModifyAppointment ? (
               <Button
                 onClick={() => setShowModifyAppointment(true)}
-                className="edit-btn question"
+                className="edit-btn ask-modify-btn"
               >
                 Want to modify?
-                <AiOutlineEdit style={{ marginLeft: "5px" }} size={20} />
+                <AiOutlineEdit />
               </Button>
             ) : (
               <>
                 <Button type="submit" className="edit-btn">
                   Modify appointment
-                  <AiOutlineEdit style={{ marginLeft: "5px" }} size={20} />
+                  <AiOutlineEdit />
                 </Button>
                 <br />
 
@@ -201,7 +203,7 @@ const ShowDetailPatientModal = (props: ShowDetailPatient) => {
                   className="remove-btn"
                 >
                   Remove appointment
-                  <MdDelete style={{ marginLeft: "5px" }} size={20} />
+                  <MdDelete />
                 </Button>
               </>
             )

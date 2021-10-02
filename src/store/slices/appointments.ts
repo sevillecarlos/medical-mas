@@ -12,7 +12,9 @@ const initialState = {
 
 export const getPatients = createAsyncThunk("auth/getPatient", async () => {
   try {
-    const res = axios.get("http://127.0.0.1:5000/api/v1/patients");
+    const res = axios.get(
+      `${process.env.REACT_APP_SERVER_URL}/api/v1/patients`
+    );
     const patients = (await res).data;
     return patients;
   } catch (error) {
@@ -25,7 +27,7 @@ export const createPatient = createAsyncThunk(
   async (patientsData: any) => {
     try {
       const res = axios.post(
-        "http://127.0.0.1:5000/api/v1/patients",
+        `${process.env.REACT_APP_SERVER_URL}/api/v1/patients`,
         patientsData
       );
       const patients = (await res).data;
@@ -40,7 +42,9 @@ export const getAppointments = createAsyncThunk(
   "auth/getAppointments",
   async () => {
     try {
-      const res = axios.get("http://127.0.0.1:5000/api/v1/appointments");
+      const res = axios.get(
+        `${process.env.REACT_APP_SERVER_URL}/api/v1/appointments`
+      );
       const appointments = (await res).data;
       return appointments;
     } catch (error) {
@@ -54,7 +58,7 @@ export const createAppointments = createAsyncThunk(
   async (appointmentsData: any) => {
     try {
       const res = axios.post(
-        "http://127.0.0.1:5000/api/v1/appointments",
+        `${process.env.REACT_APP_SERVER_URL}/api/v1/appointments`,
         appointmentsData
       );
       const appointments = (await res).data;
@@ -70,7 +74,7 @@ export const updateAppointments = createAsyncThunk(
   async (appointmentsData: any) => {
     try {
       const res = axios.put(
-        `http://127.0.0.1:5000/api/v1/appointments/${appointmentsData.id}`,
+        `${process.env.REACT_APP_SERVER_URL}/api/v1/appointments/${appointmentsData.id}`,
         {
           date: appointmentsData.date,
           time: appointmentsData.time,
@@ -89,8 +93,9 @@ export const updateAppointmentStatus = createAsyncThunk(
   "auth/updateAppointmentStatus",
   async (appointmentsData: any) => {
     try {
+      console.log(appointmentsData);
       const res = axios.patch(
-        `http://127.0.0.1:5000/api/v1/appointments/${appointmentsData.id}`,
+        `${process.env.REACT_APP_SERVER_URL}/api/v1/appointments/${appointmentsData.id}`,
         {
           status: appointmentsData.status,
         }
@@ -107,7 +112,7 @@ export const deleteAppointments = createAsyncThunk(
   async (id: any) => {
     try {
       const res = axios.delete(
-        `http://127.0.0.1:5000/api/v1/appointments/${id}`
+        `${process.env.REACT_APP_SERVER_URL}/api/v1/appointments/${id}`
       );
       const appointments = (await res).data;
       return appointments;
@@ -225,7 +230,6 @@ const appointmentSlice = createSlice({
     builder.addCase(deleteAppointments.rejected, (state) => {
       state.status = "reject";
     });
-
   },
 });
 

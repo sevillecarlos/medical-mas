@@ -223,16 +223,15 @@ const NavBar = () => {
 
       <Navbar className="nav-bar">
         <Navbar.Brand href="/">
-          <Image src={logo} className="logo-image" rounded /> <span>Medical
-          Appointment System</span>
+          <Image src={logo} className="logo-image" rounded />{" "}
+          <span>Medical Appointment System</span>
         </Navbar.Brand>
-        <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+        <Navbar.Toggle aria-controls="nav-bar" />
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="me-auto">
             {auth.token && (
               <>
                 {" "}
-               
                 <NavDropdown
                   className="user-dropdown"
                   title={`Hi ${firstName.split(" ").shift()}`}

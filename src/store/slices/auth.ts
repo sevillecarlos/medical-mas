@@ -14,7 +14,7 @@ export const fetchSignIn = createAsyncThunk(
   async (signInForm: any) => {
     try {
       const res = axios.post(
-        "http://127.0.0.1:5000/api/v1/sessions",
+        `${process.env.REACT_APP_SERVER_URL}/api/v1/sessions`,
         signInForm
       );
       const token = (await res).data;
@@ -26,7 +26,7 @@ export const fetchSignIn = createAsyncThunk(
 );
 export const fetchUsers = createAsyncThunk("auth/fetchUsers", async () => {
   try {
-    const res = axios.get("http://127.0.0.1:5000/api/v1/users");
+    const res = axios.get(`${process.env.REACT_APP_SERVER_URL}/api/v1/users`);
     const user = (await res).data;
     return user;
   } catch (error) {
@@ -38,7 +38,7 @@ export const fetchSignUp = createAsyncThunk(
   "auth/fetchSignUp",
   async (signUpForm: any) => {
     try {
-      const res = axios.post("http://127.0.0.1:5000/api/v1/users", signUpForm);
+      const res = axios.post(`${process.env.REACT_APP_SERVER_URL}/api/v1/users`, signUpForm);
       const user = (await res).data;
       return user;
     } catch (error) {
@@ -52,7 +52,7 @@ export const updateUser = createAsyncThunk(
   async (userData: any) => {
     try {
       const res = axios.put(
-        `http://127.0.0.1:5000/api/v1/users/${userData.id}`,
+        `${process.env.REACT_APP_SERVER_URL}/api/v1/users/${userData.id}`,
         {
           first_name: userData.first_name,
           last_name: userData.last_name,
@@ -72,7 +72,7 @@ export const deleteUser = createAsyncThunk(
   "auth/removeUser",
   async (id: any) => {
     try {
-      const res = axios.delete(`http://127.0.0.1:5000/api/v1/users/${id}`);
+      const res = axios.delete(`${process.env.REACT_APP_SERVER_URL}/api/v1/users/${id}`);
 
       const user = (await res).data;
       return user;

@@ -5,7 +5,7 @@ import { AiOutlineUserAdd } from "react-icons/ai";
 import { BiCommentDetail } from "react-icons/bi";
 import DatePicker from "react-datepicker";
 import { BsFillUnlockFill, BsFillLockFill } from "react-icons/bs";
-import { IoMdColorFill } from "react-icons/io";
+import { HiOutlineColorSwatch } from "react-icons/hi";
 
 import { RootStateOrAny, useDispatch, useSelector } from "react-redux";
 //MODALS
@@ -201,7 +201,7 @@ const Appointment = () => {
         appointment={appointment}
       />
 
-      <Table borderless hover responsive className="inventory-table">
+      <Table borderless hover responsive className="appointment-table">
         <thead>
           <tr>
             <th>
@@ -210,30 +210,30 @@ const Appointment = () => {
                 placement="right"
                 overlay={popoverMapKey}
               >
-                <Button className="color-key-btn">
+                <Button className="color-key-btn table-btn">
                   {" "}
-                  Color Key <IoMdColorFill />
+                  Color Key <HiOutlineColorSwatch />
                 </Button>
               </OverlayTrigger>
             </th>
             <th>
               {" "}
               <Button
-                className="add-appointment"
-                onClick={() => setShowRegisterAppointment(true)}
+                className="add-patients table-btn"
+                onClick={() => setShowRegisterPatients(true)}
               >
-                Register Appointments
-                <GrFormAdd />
+                Register Patients
+                <AiOutlineUserAdd />
               </Button>
             </th>
             <th>
               {" "}
               <Button
-                className="add-patients"
-                onClick={() => setShowRegisterPatients(true)}
+                className="add-appointment table-btn"
+                onClick={() => setShowRegisterAppointment(true)}
               >
-                Register Patients
-                <AiOutlineUserAdd />
+                Register Appointments
+                <GrFormAdd />
               </Button>
             </th>
             <th>
@@ -267,7 +267,7 @@ const Appointment = () => {
           {appointmentList.map((v: any) => {
             return (
               <tr key={v.id}>
-                <td>
+                <td className="date-column">
                   <span
                     className={`${
                       v.date === todayDate
@@ -288,10 +288,10 @@ const Appointment = () => {
                 <td>
                   <div>
                     <Button
-                      className="show-detail-btn"
+                      className="show-detail-btn table-btn"
                       onClick={() => showDetail(v)}
                     >
-                      Show Detail <BiCommentDetail />
+                      Detail <BiCommentDetail />
                     </Button>
                   </div>
                 </td>
@@ -299,7 +299,9 @@ const Appointment = () => {
                   {" "}
                   <Button
                     onClick={(e) => modifyAppointmentStatus(e, v.id, v.status)}
-                    className={v.status ? "close-btn" : "open-btn"}
+                    className={`${
+                      v.status ? "close-btn" : "open-btn"
+                    } table-btn`}
                   >
                     {v.status ? (
                       <span>

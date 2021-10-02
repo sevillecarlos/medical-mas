@@ -21,7 +21,7 @@
 }
 .logo-image {
   width: 4.5vw;
-  margin-left: 10px;
+  padding: 5px;
 }
 
 .user-dropdown {
@@ -29,6 +29,10 @@
   font-size: 1.3vw !important;
   color: black !important;
   position: relative;
+ 
+}
+.user-dropdown span,a {
+  font-size: 1vw !important;
 }
 .form-input-add-user {
   border-radius: 20px !important;

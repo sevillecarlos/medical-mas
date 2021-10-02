@@ -2,23 +2,33 @@
   background-color: rgba(127, 255, 212, 0.39) !important;
 }
 .date-filter {
-  width: 70% !important;
   border: none;
   padding: 5px;
   text-align: center;
 }
 
 .status-filter {
-  width: 100% !important;
+  text-align: right !important;
 }
 
 .patient-form {
   border: none;
   padding: 5px;
   text-align: center;
-  font-size: 16px;
+  font-size: 100%;
 }
-
+.date-input {
+  width: 100% !important;
+  font-size: 100% !important;
+  text-align: center !important;
+  border-radius: 20px !important;
+  box-shadow: 1px 0px 14px 0px rgba(0, 0, 0, 0.36);
+  -webkit-box-shadow: 1px 0px 14px 0px rgba(0, 0, 0, 0.36);
+  -moz-box-shadow: 1px 0px 14px 0px rgba(0, 0, 0, 0.36);
+}
+.modal-btn {
+  font-size: 100% !important;
+}
 .form-input-phone,
 .text-phone-number {
   border-radius: 20px !important;
@@ -28,7 +38,7 @@
   -moz-box-shadow: 1px 0px 14px 0px rgba(0, 0, 0, 0.36);
 }
 .add-appointment {
-  background-color: rgba(8, 252, 69, 0.493) !important;
+  background-color: rgba(8, 252, 69, 0.384) !important;
 }
 .show-detail-btn {
   background-color: rgba(52, 238, 129, 0.171) !important;
@@ -41,11 +51,11 @@
 }
 .remove-btn {
   margin-top: 5px;
-  width: 45% !important;
+  width: 50% !important;
   background-color: rgba(255, 0, 0, 0.459) !important;
 }
 
-.question {
+.ask-modify-btn {
   width: 40% !important;
 }
 
@@ -59,6 +69,7 @@
 .status-appointment {
   border-radius: 50px;
   padding: 15px;
+  font-size: 100%;
   width: 20%;
   text-align: center;
   color: rgb(0, 0, 0);
@@ -69,16 +80,18 @@
 .open-status {
   background-color: rgba(9, 243, 9, 0.774);
 }
-
+.modal-title {
+  font-size: 100%vw !important;
+}
 .close-status {
   background-color: rgba(7, 14, 7, 0.774);
 }
-.inventory-table {
+.appointment-table {
   background-color: rgba(245, 245, 245, 0.87) !important;
   border-radius: 20px;
   margin: auto;
   text-align: center;
-  width: 90% !important;
+  width: 95% !important;
   margin-top: 20px;
   box-shadow: 1px 0px 14px 0px rgba(0, 0, 0, 0.36);
   -webkit-box-shadow: 1px 0px 14px 0px rgba(0, 0, 0, 0.36);
@@ -87,27 +100,29 @@
 .btn {
   border: none !important;
   border-radius: 20px !important;
-  font-size: 1vw !important;
   color: rgb(34, 32, 32) !important;
   background-color: rgba(172, 255, 47, 0.521);
   box-shadow: 1px 0px 14px 0px rgba(0, 0, 0, 0.36);
   -webkit-box-shadow: 1px 0px 14px 0px rgba(0, 0, 0, 0.36);
   -moz-box-shadow: 1px 0px 14px 0px rgba(0, 0, 0, 0.36);
 }
+.table-btn {
+  font-size: 1vw !important;
+}
 td {
   font-size: 1vw !important;
 }
 
 .filter-input {
-  width: 80% !important;
+  width: 85% !important;
   font-size: 1vw !important;
+
   text-align: center !important;
   border-radius: 20px !important;
   box-shadow: 1px 0px 14px 0px rgba(0, 0, 0, 0.36);
   -webkit-box-shadow: 1px 0px 14px 0px rgba(0, 0, 0, 0.36);
   -moz-box-shadow: 1px 0px 14px 0px rgba(0, 0, 0, 0.36);
 }
-
 .categories-filter {
   width: 80% !important;
   border-radius: 20px !important;
@@ -115,9 +130,22 @@ td {
   -webkit-box-shadow: 1px 0px 14px 0px rgba(0, 0, 0, 0.36);
   -moz-box-shadow: 1px 0px 14px 0px rgba(0, 0, 0, 0.36);
 }
+.modal-show-detail-appointment {
+  font-size: 100% !important;
+}
+
+.date-column {
+  padding: 1.5% !important;
+}
+.modal-label {
+  font-size: 100% !important;
+}
+.modal-register-patient {
+  font-size: 100% !important;
+}
 
 .form-input-add-supply {
-  width: 100% !important;
+  font-size: 100% !important;
   border-radius: 20px !important;
   box-shadow: 1px 0px 14px 0px rgba(0, 0, 0, 0.36);
   -webkit-box-shadow: 1px 0px 14px 0px rgba(0, 0, 0, 0.36);
@@ -126,8 +154,12 @@ td {
 
 .add-appointment-btn,
 .add-patient-btn {
-  width: 100% !important;
-  background-color: rgba(0, 128, 0, 0.582) !important;
+  width: 50% !important;
+  background-color: rgba(32, 223, 32, 0.582) !important;
+  margin: auto !important;
+}
+.modal-btn-container {
+  text-align: center;
 }
 
 .modal-add-supply {
@@ -135,7 +167,7 @@ td {
 }
 .sub-header-inventory-table {
   background-color: rgba(128, 128, 128, 0.507) !important;
-  font-size: 20px;
+  font-size: 1vw;
 }
 
 .quantity-td {
@@ -183,7 +215,7 @@ td {
 .soon {
   background-color: rgba(241, 255, 47, 0.26) !important;
 }
-.color-key-btn{
+.color-key-btn {
   background-color: rgba(95, 158, 160, 0.521) !important;
 }
 #popover-patient-info {
@@ -195,22 +227,19 @@ td {
   -moz-box-shadow: 1px 0px 14px 0px rgba(0, 0, 0, 0.36);
 }
 #popover-patient-info label {
-  font-size: 1vw;
+  font-size: 100%;
 }
 #popover-patient-info h5 {
-  font-size: 0.9vw;
+  font-size: 100%;
 }
 #popover-color-map-key {
   background-color: rgba(255, 255, 255, 0.938) !important;
   padding: 0.2%;
   border-radius: 30px;
+  font-size: 1vw;
   box-shadow: 1px 0px 14px 0px rgba(0, 0, 0, 0.36);
   -webkit-box-shadow: 1px 0px 14px 0px rgba(0, 0, 0, 0.36);
   -moz-box-shadow: 1px 0px 14px 0px rgba(0, 0, 0, 0.36);
-}
-
-#popover-color-map-key p {
-  font-size: 1vw;
 }
 
 .show-patient-info {
