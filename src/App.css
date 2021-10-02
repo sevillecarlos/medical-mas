@@ -1,15 +1,13 @@
 .app {
   width: 70%;
   margin: auto;
+  font-family: "Raleway", sans-serif;
 }
 *:focus {
-  outline: transparent !important;
+  outline: none !important;
+  box-shadow: 0 0 10px #ffffff27 !important;
   border-color: transparent !important;
-  border-radius: 20px;
-
-  box-shadow: 1px 0px 14px 0px rgba(0, 0, 0, 0);
-  -webkit-box-shadow: 1px 0px 14px 0px rgba(0, 0, 0, 0);
-  -moz-box-shadow: 1px 0px 14px 0px rgba(0, 0, 0, 0);
+  border-radius: 25px !important;
 }
 
 .ribbon {
@@ -19,7 +17,6 @@
   position: absolute;
   left: -50px;
   top: 40px;
-
   -webkit-transform: rotate(-45deg);
   -moz-transform: rotate(-45deg);
   -ms-transform: rotate(-45deg);
@@ -39,6 +36,31 @@
   text-align: center;
   text-decoration: none;
   text-shadow: 0 0 5px rgb(0, 0, 0);
+}
+.only-computer-msg {
+  border-radius: 25px;
+  padding: 15px;
+  font-size: 10vw;
+  margin: 50% auto;
+  color: rgb(59, 58, 58);
+}
+.only-computer-msg img{
+  width: 15vw !important;
+}
+::-webkit-scrollbar {
+  width: 1vw;
+}
+::-webkit-scrollbar-track {
+  background: #888;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgb(248, 248, 248);
+  border-radius: 25px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
 }
 
 /************************************************************/

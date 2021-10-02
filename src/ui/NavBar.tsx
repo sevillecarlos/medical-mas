@@ -8,7 +8,7 @@ import {
   Form,
   Modal,
 } from "react-bootstrap";
-import logo from "../assets/img/logo-sarrs.png";
+import logo from "../assets/img/logo-mas.png";
 import { authAction, fetchSignUp } from "../store/slices/auth";
 import { RootStateOrAny, useDispatch, useSelector } from "react-redux";
 import { AiOutlineUserAdd } from "react-icons/ai";
@@ -48,9 +48,6 @@ const NavBar = () => {
 
   useEffect(() => {
     dispatch(authAction.getToken());
-    return () => {
-      // cleanup;
-    };
   }, [dispatch]);
 
   useEffect(() => {
@@ -60,9 +57,6 @@ const NavBar = () => {
       setUserName(username);
       setUserType(user_type);
     }
-    return () => {
-      // cleanup;
-    };
   }, [auth.token]);
 
   useEffect(() => {
@@ -221,12 +215,14 @@ const NavBar = () => {
         </Modal.Body>
       </Modal>
 
-      <Navbar className="nav-bar">
+      <Navbar bg="light" expand="lg" className="nav-bar">
         <Navbar.Brand href="/">
           <Image src={logo} className="logo-image" rounded />{" "}
           <span>Medical Appointment System</span>
         </Navbar.Brand>
-        <Navbar.Toggle aria-controls="nav-bar" />
+
+        {auth.token && <Navbar.Toggle aria-controls="nav-bar" />}
+
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="me-auto">
             {auth.token && (
@@ -237,10 +233,9 @@ const NavBar = () => {
                   title={`Hi ${firstName.split(" ").shift()}`}
                   id="collasible-nav-dropdown"
                 >
-                  <NavDropdown.ItemText>
-                    Login as
-                    <span className="badge-user"> {userName}</span>
-                  </NavDropdown.ItemText>
+                  <NavDropdown.Item disabled>
+                    Login as: <strong> {userName}</strong>
+                  </NavDropdown.Item>
                   {userType === "admin" && (
                     <>
                       <NavDropdown.Item

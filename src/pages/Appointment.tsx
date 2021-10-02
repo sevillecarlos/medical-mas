@@ -203,7 +203,7 @@ const Appointment = () => {
         appointment={appointment}
       />
 
-      <Table borderless hover responsive className="appointment-table">
+      <Table borderless  responsive className="appointment-table">
         <thead>
           <tr>
             <th>

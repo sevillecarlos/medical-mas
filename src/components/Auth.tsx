@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { Card } from "react-bootstrap";
-import { Form, Button } from "react-bootstrap";
+import { Form, Button, Spinner } from "react-bootstrap";
 import { RootStateOrAny, useDispatch, useSelector } from "react-redux";
-import logo from "../assets/img/logo-sarrs.png";
+import logo from "../assets/img/logo-mas.png";
 import { MdKeyboardArrowRight } from "react-icons/md";
 import "./style/Auth.css";
 
@@ -17,6 +17,7 @@ const Auth = () => {
     username: "",
     password: "",
   });
+  const [showLoader, setShowLoader] = useState(false);
 
   const changeSignInForm = (e: any) => {
     setSignInForm({ ...signInForm, [e.target.name]: e.target.value });
@@ -25,12 +26,16 @@ const Auth = () => {
   const signIn = async (e: any) => {
     e.preventDefault();
     dispatch(fetchSignIn(signInForm));
+    setShowLoader(true);
   };
 
   useEffect(() => {
-    setTimeout(() => {
-      dispatch(authAction.clearError());
-    }, 3000);
+    if (auth.error) {
+      setShowLoader(false);
+      setTimeout(() => {
+        dispatch(authAction.clearError());
+      }, 3000);
+    }
   }, [auth.error, dispatch]);
 
   return (
@@ -49,30 +54,40 @@ const Auth = () => {
               <option value="admin">Administrator</option>
             </Form.Select>
             <Form.Group className="mb-3" controlId="formBasicEmailSignIn">
-              <Form.Label className='auth-label'>Username</Form.Label>
+              <Form.Label className="auth-label">Username</Form.Label>
               <Form.Control
                 name="username"
                 type="text"
                 className="input-auth"
                 placeholder="Enter username"
+                required
                 onChange={changeSignInForm}
               />
             </Form.Group>
 
             <Form.Group className="mb-3" controlId="formBasicPasswordSignIn">
-              <Form.Label className='auth-label'>Password</Form.Label>
+              <Form.Label className="auth-label">Password</Form.Label>
               <Form.Control
                 name="password"
                 className="input-auth"
                 onChange={changeSignInForm}
                 type="password"
+                required
                 placeholder="Enter password"
               />
             </Form.Group>
-            {auth.error !== null && <span className='error-msg'>{auth.error}</span>}
-            <Button className="auth-btn" type="submit">
-              Login <MdKeyboardArrowRight />
-            </Button>
+            {auth.error !== null && (
+              <span className="error-msg">{auth.error}</span>
+            )}
+            {showLoader ? (
+              <Button className="auth-btn" type="submit">
+                <Spinner animation="border" variant="secondary" />
+              </Button>
+            ) : (
+              <Button className="auth-btn" type="submit">
+                Login <MdKeyboardArrowRight />
+              </Button>
+            )}
           </Form>
         </Card.Body>
       </Card>

@@ -65,7 +65,7 @@ const AddAppointmentModal = (props: AddAppointmentModalI) => {
   return (
     <Modal
       show={showRegisterAppointment}
-      className="modal-modify-supply"
+      className="modal-add-appointment"
       onHide={handleCloseRegisterAppointment}
       backdrop="static"
     >

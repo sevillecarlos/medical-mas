@@ -78,20 +78,20 @@
   -moz-box-shadow: 1px 0px 14px 0px rgba(0, 0, 0, 0.36);
 }
 .open-status {
-  background-color: rgba(9, 243, 9, 0.774);
+  background-color: rgba(9, 243, 9, 0.342);
 }
 .modal-title {
   font-size: 100%vw !important;
 }
 .close-status {
-  background-color: rgba(7, 14, 7, 0.774);
+  background-color: rgba(7, 14, 7, 0.459);
 }
 .appointment-table {
   background-color: rgba(245, 245, 245, 0.87) !important;
   border-radius: 20px;
   margin: auto;
   text-align: center;
-  width: 95% !important;
+  width: 100% !important;
   margin-top: 20px;
   box-shadow: 1px 0px 14px 0px rgba(0, 0, 0, 0.36);
   -webkit-box-shadow: 1px 0px 14px 0px rgba(0, 0, 0, 0.36);
@@ -107,10 +107,10 @@
   -moz-box-shadow: 1px 0px 14px 0px rgba(0, 0, 0, 0.36);
 }
 .table-btn {
-  font-size: 1vw !important;
+  font-size: 1.2vw !important;
 }
 td {
-  font-size: 1vw !important;
+  font-size: 1.2vw !important;
 }
 
 .filter-input {
@@ -130,9 +130,6 @@ td {
   -webkit-box-shadow: 1px 0px 14px 0px rgba(0, 0, 0, 0.36);
   -moz-box-shadow: 1px 0px 14px 0px rgba(0, 0, 0, 0.36);
 }
-.modal-show-detail-appointment {
-  font-size: 100% !important;
-}
 
 .date-column {
   padding: 1.5% !important;
@@ -140,8 +137,11 @@ td {
 .modal-label {
   font-size: 100% !important;
 }
-.modal-register-patient {
+.modal-show-detail-appointment,
+.modal-register-patient,
+.modal-add-appointment {
   font-size: 100% !important;
+  font-family: "Raleway", sans-serif;
 }
 
 .form-input-add-supply {
@@ -187,11 +187,6 @@ td {
   margin-top: 20px;
 }
 
-.quantity-row {
-  font-size: 20px;
-  font-weight: bold;
-}
-
 .modal-content {
   border-radius: 20px !important;
 }
@@ -221,6 +216,8 @@ td {
 #popover-patient-info {
   background-color: rgb(255, 255, 255) !important;
   padding: 0.3%;
+  font-family: "Raleway", sans-serif;
+
   border-radius: 20px;
   box-shadow: 1px 0px 14px 0px rgba(0, 0, 0, 0.36);
   -webkit-box-shadow: 1px 0px 14px 0px rgba(0, 0, 0, 0.36);
@@ -234,8 +231,9 @@ td {
 }
 #popover-color-map-key {
   background-color: rgba(255, 255, 255, 0.938) !important;
-  padding: 0.2%;
   border-radius: 30px;
+  font-family: "Raleway", sans-serif;
+
   font-size: 1vw;
   box-shadow: 1px 0px 14px 0px rgba(0, 0, 0, 0.36);
   -webkit-box-shadow: 1px 0px 14px 0px rgba(0, 0, 0, 0.36);
@@ -243,9 +241,9 @@ td {
 }
 
 .show-patient-info {
-  background-color: rgb(248, 190, 0) !important;
+  background-color: rgba(248, 190, 0, 0.459) !important;
 }
-.react-time-picker__wrapper{
+.react-time-picker__wrapper {
   border: none !important;
 }
 /*******************************************************/

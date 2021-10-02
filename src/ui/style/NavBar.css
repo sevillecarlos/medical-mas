@@ -5,8 +5,9 @@
 }
 .nav-bar {
   background-color: rgba(245, 245, 245, 0.87) !important;
-  border-radius: 100px;
-  width: 80%;
+  border-radius: 2vw;
+  text-align: center;
+  width: 50%;
   margin: auto;
   margin-top: 1%;
   box-shadow: 1px 0px 14px 0px rgba(0, 0, 0, 0.36);
@@ -14,25 +15,43 @@
   -moz-box-shadow: 1px 0px 14px 0px rgba(0, 0, 0, 0.36);
 }
 .nav-bar span {
-  font-size: 1.4vw;
   color: rgb(79, 80, 82);
   text-align: center !important;
+  font-size: 1.5vw!important;
 }
 .logo-image {
   width: 4.5vw;
-  padding: 5px;
+  padding: 3px;
 }
 
 .user-dropdown {
-  margin-left: 20vw;
-  font-size: 1.3vw !important;
-  color: black !important;
+  margin: auto;
   position: relative;
- 
+  background-color: rgba(150, 148, 146, 0.61) !important;
+  padding: 0.3vw !important;
+  width: 5vw;
+  border-radius: 1vw !important;
+  box-shadow: 1px 0px 14px 0px rgba(0, 0, 0, 0.36);
+  -webkit-box-shadow: 1px 0px 14px 0px rgba(0, 0, 0, 0.36);
+  -moz-box-shadow: 1px 0px 14px 0px rgba(0, 0, 0, 0.36);
+  font-size: 1vw;
 }
-.user-dropdown span,a {
-  font-size: 1vw !important;
+.dropdown-menu {
+  border-radius: 5% !important;
+  background-color: rgba(255, 255, 255, 0.904) !important;
+  border: none !important;
+  min-width: 10vw !important;
+  box-shadow: 1px 0px 14px 0px rgba(0, 0, 0, 0.36);
+  -webkit-box-shadow: 1px 0px 14px 0px rgba(0, 0, 0, 0.36);
+  -moz-box-shadow: 1px 0px 14px 0px rgba(0, 0, 0, 0.36);
 }
+
+.user-dropdown span,
+a {
+  color: black !important;
+  font-size: 1vw;
+}
+
 .form-input-add-user {
   border-radius: 20px !important;
   box-shadow: 1px 0px 14px 0px rgba(0, 0, 0, 0.36);
@@ -47,8 +66,6 @@
 }
 .badge-user {
   color: black !important;
-  margin-left: 5px;
-  font-size: 19px !important;
   font-weight: bold;
 }
 .suggestion-username-btn {
@@ -71,45 +88,5 @@
 
 /*Small Phone from 0 to 480px*/
 @media only screen and (max-width: 400px) {
-  .nav-bar {
-    width: 90%;
-    margin-top: 10%;
-  }
-  .nav-bar span {
-    font-size: 3.5vw !important;
-    color: rgb(79, 80, 82);
-    text-align: center !important;
-  }
-  .logo-image {
-    width: 10vw;
-    margin-left: 10px;
-  }
-
-  .user-dropdown {
-    margin-left: 20vw;
-    font-size: 1vw !important;
-    color: black !important;
-  }
-  .form-input-add-user {
-    border-radius: 20px !important;
-    box-shadow: 1px 0px 14px 0px rgba(0, 0, 0, 0.36);
-    -webkit-box-shadow: 1px 0px 14px 0px rgba(0, 0, 0, 0.36);
-    -moz-box-shadow: 1px 0px 14px 0px rgba(0, 0, 0, 0.36);
-  }
-
-  .add-user-btn {
-    background-color: rgba(148, 255, 127, 0.452) !important;
-    border-radius: 20px !important;
-    width: 100%;
-  }
-  .badge-user {
-    color: black !important;
-    margin-left: 5px;
-    font-size: 19px !important;
-    font-weight: bold;
-  }
-  .suggestion-username-btn {
-    border-radius: 20px !important;
-    background-color: rgb(255, 255, 255) !important;
-  }
+ 
 }
