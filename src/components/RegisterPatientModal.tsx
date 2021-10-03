@@ -61,6 +61,7 @@ const RegisterPatientModal = (props: RegisterPatient) => {
             <Form.Control
               className="form-input-add-supply"
               type="text"
+              required
               onChange={changePatientForm}
               name="patient_id"
               placeholder="Enter patient ID"
@@ -72,6 +73,7 @@ const RegisterPatientModal = (props: RegisterPatient) => {
               className="form-input-add-supply"
               type="text"
               onChange={changePatientForm}
+              required
               name="first_name"
               placeholder="Enter first name"
             />
@@ -83,6 +85,7 @@ const RegisterPatientModal = (props: RegisterPatient) => {
               type="text"
               onChange={changePatientForm}
               name="last_name"
+              required
               placeholder="Enter last name"
             />
           </Form.Group>
@@ -92,6 +95,7 @@ const RegisterPatientModal = (props: RegisterPatient) => {
               onChange={handleChangePatientDate}
               value={patientForm.birth_date}
               className="date-input patient-form"
+              required
               placeholderText="Enter your birth day"
             />
           </Form.Group>
@@ -101,11 +105,11 @@ const RegisterPatientModal = (props: RegisterPatient) => {
               className="form-input-add-supply"
               onChange={changePatientForm}
               name="patient_gender"
-              required={true}
+              required
             >
-              <option>Select your gender</option>
-              <option>Female</option>
-              <option>Male</option>
+              <option value="">Select your gender</option>
+              <option value="female">Female</option>
+              <option value="male">Male</option>
             </Form.Select>
           </Form.Group>
           <Form.Group className="mb-3">
@@ -117,6 +121,7 @@ const RegisterPatientModal = (props: RegisterPatient) => {
                 className="form-input-add-supply "
                 name="phone_number"
                 onChange={changePatientForm}
+                required
               />
             </InputGroup>
           </Form.Group>
@@ -126,6 +131,7 @@ const RegisterPatientModal = (props: RegisterPatient) => {
               as="textarea"
               onChange={changePatientForm}
               className="form-input-add-supply"
+              required
               placeholder="Enter a detail of the item"
               name="address"
               style={{ height: "90px" }}

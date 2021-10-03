@@ -5,9 +5,9 @@
 }
 *:focus {
   outline: none !important;
-  box-shadow: 0 0 10px #ffffff27 !important;
-  border-color: transparent !important;
-  border-radius: 25px !important;
+  box-shadow: 0 0 10px #22212152 !important;
+  border: transparent !important;
+
 }
 
 .ribbon {
@@ -44,7 +44,7 @@
   margin: 50% auto;
   color: rgb(59, 58, 58);
 }
-.only-computer-msg img{
+.only-computer-msg img {
   width: 15vw !important;
 }
 ::-webkit-scrollbar {

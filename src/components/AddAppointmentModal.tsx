@@ -6,7 +6,7 @@ import TimePicker from "react-time-picker";
 import { useDispatch } from "react-redux";
 import { createAppointments } from "../store/slices/appointments";
 
-import { AiOutlineUserAdd } from "react-icons/ai";
+import { GrFormAdd } from "react-icons/gr";
 
 import DropDownFilter from "../ui/DropDownFilter";
 
@@ -78,6 +78,7 @@ const AddAppointmentModal = (props: AddAppointmentModalI) => {
             <Form.Label>Patient</Form.Label>
             <DropDownFilter
               items={appointment.patients}
+              required
               appointmentFormPatient={setAppointmentForm}
             />
           </Form.Group>
@@ -88,6 +89,7 @@ const AddAppointmentModal = (props: AddAppointmentModalI) => {
               onChange={handleChangeAppointmentDate}
               value={appointmentForm.date}
               className="date-input patient-form"
+              required
               placeholderText="Enter your appointment date"
             />
           </Form.Group>
@@ -95,6 +97,7 @@ const AddAppointmentModal = (props: AddAppointmentModalI) => {
             <Form.Label>Time</Form.Label>
             <TimePicker
               disableClock
+              required
               className="appointment-time"
               amPmAriaLabel={"Select am/pm"}
               onChange={changeAppointmentTime}
@@ -108,6 +111,7 @@ const AddAppointmentModal = (props: AddAppointmentModalI) => {
               onChange={changeAppointmentForm}
               value={appointmentForm.reason}
               className="form-input-add-supply"
+              required
               placeholder="Enter a reason of the appointment"
               name="reason"
               style={{ height: "100px" }}
@@ -116,7 +120,7 @@ const AddAppointmentModal = (props: AddAppointmentModalI) => {
           <div className="modal-btn-container">
             <Button type="submit" className="add-appointment-btn">
               Add Appointment
-              <AiOutlineUserAdd style={{ marginLeft: "5px" }} size={20} />
+              <GrFormAdd />
             </Button>
           </div>
         </Form>

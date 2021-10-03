@@ -48,8 +48,10 @@ const Auth = () => {
               className="user-type-select"
               aria-label="Default select example"
               name="user_type"
+              required
               onChange={changeSignInForm}
             >
+              <option value="">Select user type</option>
               <option value="staff">Staff</option>
               <option value="admin">Administrator</option>
             </Form.Select>
