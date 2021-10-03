@@ -28,7 +28,6 @@ import AlertModal from "../ui/AlertModal";
 const todayDate = new Date().toLocaleDateString();
 const Appointment = () => {
   const dispatch = useDispatch();
-
   const appointment = useSelector((state: RootStateOrAny) => state.appointment);
   /**************************STATES******************/
   const [showRegisterPatients, setShowRegisterPatients] = useState(false);
@@ -40,6 +39,8 @@ const Appointment = () => {
   const [appointmentId, setAppointmentId] = useState(null);
   const [dateAppointmentForm, setDateAppointmentForm] = useState({});
   const [appointmentList, setAppointmentList] = useState(Array<any>());
+  const [appointmentIdLoader, setAppointmentIdLoader] = useState(-1);
+
   const [appointmentFormDetail, setAppointmentFormDetail] = useState({
     patient_id: 0,
     date: "",
@@ -144,6 +145,7 @@ const Appointment = () => {
   useEffect(() => {
     if (appointment.appointments) {
       setAppointmentList(appointment.appointments);
+      setAppointmentIdLoader(-1);
       statusFilter();
     }
   }, [appointment.appointments]);
@@ -183,6 +185,7 @@ const Appointment = () => {
   );
   const modifyAppointmentStatus = (e: any, id: any, status: any) => {
     e.preventDefault();
+    setAppointmentIdLoader(id);
     dispatch(updateAppointmentStatus({ status: !status, id }));
   };
 
@@ -318,11 +321,13 @@ const Appointment = () => {
                   >
                     {v.status ? (
                       <span>
-                        Close <BsFillLockFill />
+                        {appointmentIdLoader === v.id ? "Closing..." : "Close"}
+                        <BsFillLockFill />
                       </span>
                     ) : (
                       <span>
-                        Open <BsFillUnlockFill />
+                        {appointmentIdLoader === v.id ? "Openning..." : "Open"}
+                        <BsFillUnlockFill />
                       </span>
                     )}{" "}
                   </Button>

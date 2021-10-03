@@ -93,7 +93,6 @@ export const updateAppointmentStatus = createAsyncThunk(
   "auth/updateAppointmentStatus",
   async (appointmentsData: any) => {
     try {
-      console.log(appointmentsData);
       const res = axios.patch(
         `${process.env.REACT_APP_SERVER_URL}/api/v1/appointments/${appointmentsData.id}`,
         {
