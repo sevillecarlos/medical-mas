@@ -215,7 +215,7 @@ const ShowDetailPatientModal = (props: ShowDetailPatient) => {
 };
 
 ShowDetailPatientModal.propTypes = {
-  appointmentId: PropTypes.number.isRequired,
+  appointmentId: PropTypes.number,
   setShowDetailAppointment: PropTypes.func.isRequired,
   showDetailAppointment: PropTypes.bool.isRequired,
   dateAppointmentForm: PropTypes.object.isRequired,

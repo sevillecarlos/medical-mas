@@ -28,7 +28,7 @@
 }
 .ribbon a {
   border: 1px solid rgb(38, 137, 219);
-  color: rgb(255, 255, 255);
+  color: rgb(255, 255, 255) !important;
   display: block;
   font: bold 100% "Helvetica Neue", Helvetica, Arial, sans-serif;
   margin: 1px 0;

@@ -37,7 +37,7 @@
   font-size: 1vw;
 }
 .dropdown-menu {
-  border-radius: 5% !important;
+  border-radius: 5px !important;
   background-color: rgba(255, 255, 255, 0.904) !important;
   border: none !important;
   min-width: 10vw !important;

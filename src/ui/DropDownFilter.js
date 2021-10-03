@@ -47,7 +47,7 @@ const DropDownFilter = (props) => {
               value={value}
             />
           </Form>
-          <ul className=" patients-list">
+          <ul className="patients-list">
             {React.Children.toArray(children).filter(
               (child) =>
                 !value || child.props.children.toLowerCase().startsWith(value)
@@ -75,7 +75,7 @@ const DropDownFilter = (props) => {
         {items?.map((v) => {
           const fullNameId = `${v.first_name} ${v.last_name} |  ${v.patient_id}`;
           return (
-            <Dropdown.Item key={v.id} onClick={(e) => selectPatient(e, v.id)}>
+            <Dropdown.Item key={v.id} className='dropdown-filter-item' onClick={(e) => selectPatient(e, v.id)}>
               {fullNameId}
             </Dropdown.Item>
           );

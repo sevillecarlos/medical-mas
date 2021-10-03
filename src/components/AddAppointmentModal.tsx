@@ -132,7 +132,7 @@ const AddAppointmentModal = (props: AddAppointmentModalI) => {
 AddAppointmentModal.propTypes = {
   showRegisterAppointment: PropTypes.bool.isRequired,
   handleCloseRegisterAppointment: PropTypes.func.isRequired,
-  appointment: PropTypes.array.isRequired,
+  appointment: PropTypes.object.isRequired,
 };
 
 export default AddAppointmentModal;

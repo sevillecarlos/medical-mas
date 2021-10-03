@@ -1,14 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { Table, Button, Form, OverlayTrigger, Popover } from "react-bootstrap";
-import { GrFormAdd } from "react-icons/gr";
-import { AiOutlineUserAdd } from "react-icons/ai";
-import { BiCommentDetail } from "react-icons/bi";
 import DatePicker from "react-datepicker";
-import { BsFillUnlockFill, BsFillLockFill } from "react-icons/bs";
-import { HiOutlineColorSwatch } from "react-icons/hi";
 
 import { RootStateOrAny, useDispatch, useSelector } from "react-redux";
-//MODALS
+
 import RegisterPatientModal from "../components/RegisterPatientModal";
 import ShowDetailPatientModal from "../components/ShowDetailPatientModal";
 import AddAppointmentModal from "../components/AddAppointmentModal";
@@ -20,6 +15,11 @@ import {
   updateAppointmentStatus,
 } from "../store/slices/appointments";
 
+import { GrFormAdd } from "react-icons/gr";
+import { AiOutlineUserAdd } from "react-icons/ai";
+import { BiCommentDetail } from "react-icons/bi";
+import { BsFillUnlockFill, BsFillLockFill } from "react-icons/bs";
+import { HiOutlineColorSwatch } from "react-icons/hi";
 import "react-datepicker/dist/react-datepicker.css";
 import "./style/Appointments.css";
 
@@ -30,29 +30,16 @@ const Appointment = () => {
   const dispatch = useDispatch();
 
   const appointment = useSelector((state: RootStateOrAny) => state.appointment);
-
-  const handleUpdateAppointmentDate = (date: string) => {
-    setAppointmentFormDetail((prevState: any) => {
-      const formatDate = new Date(date).toLocaleDateString();
-
-      return { ...prevState, date: formatDate };
-    });
-  };
-
+  /**************************STATES******************/
   const [showRegisterPatients, setShowRegisterPatients] = useState(false);
-
   const [showRegisterAppointment, setShowRegisterAppointment] = useState(false);
   const [showDetailAppointment, setShowDetailAppointment] = useState(false);
+  const [reloadAppointment, setReloadAppointment] = useState(false);
   const [statusAppointment, setStatusAppointment] = useState(1);
   const [filterDate, setFilterDate] = useState(null);
-
-  const handleCloseRegisterPatients = () => setShowRegisterPatients(false);
-
-  const handleCloseRegisterAppointment = () =>
-    setShowRegisterAppointment(false);
-
   const [appointmentId, setAppointmentId] = useState(null);
-
+  const [dateAppointmentForm, setDateAppointmentForm] = useState({});
+  const [appointmentList, setAppointmentList] = useState(Array<any>());
   const [appointmentFormDetail, setAppointmentFormDetail] = useState({
     patient_id: 0,
     date: "",
@@ -61,53 +48,38 @@ const Appointment = () => {
     status: true,
   });
 
-  const [dateAppointmentForm, setDateAppointmentForm] = useState({});
+  /**************************FUNCTIONS******************/
+  const handleCloseRegisterPatients = () => setShowRegisterPatients(false);
 
-  const [appointmentList, setAppointmentList] = useState(Array<any>());
+  const handleCloseRegisterAppointment = () =>
+    setShowRegisterAppointment(false);
 
-  const statusFilter = (e?: any) => {
-    const filterValue = e?.target.value ? e.target.value : statusAppointment;
-    const filterAppoinmentArr = appointment.appointments.filter(
-      (appointment: { status: boolean }) => {
-        return appointment.status == filterValue;
-      }
-    );
-    setStatusAppointment(e?.target.value ?? 1);
+  const statusFilter = useCallback(
+    (e?: any) => {
+      const filterValue = e?.target.value ? e.target.value : statusAppointment;
+      const filterAppoinmentArr = appointment.appointments.filter(
+        (appointment: { status: boolean }) => {
+          return appointment.status == filterValue;
+        }
+      );
+      setStatusAppointment(e?.target.value ?? statusAppointment);
 
-    const orderByDate = filterAppoinmentArr.sort(
-      (a: { date: string }, b: { date: string }) =>
-        new Date(b.date).valueOf() - new Date(a.date).valueOf()
-    );
-    setAppointmentList(orderByDate);
+      const orderByDate = filterAppoinmentArr.sort(
+        (a: { date: string }, b: { date: string }) =>
+          new Date(b.date).valueOf() - new Date(a.date).valueOf()
+      );
+      setAppointmentList(orderByDate);
+    },
+    [appointment.appointments, statusAppointment]
+  );
+
+  const handleUpdateAppointmentDate = (date: string) => {
+    setAppointmentFormDetail((prevState: any) => {
+      const formatDate = new Date(date).toLocaleDateString();
+
+      return { ...prevState, date: formatDate };
+    });
   };
-
-  useEffect(() => {
-    dispatch(getPatients());
-    dispatch(getAppointments());
-  }, [dispatch]);
-
-  useEffect(() => {
-    if (appointment.appointments) {
-      setAppointmentList(appointment.appointments);
-      statusFilter();
-    }
-  }, [appointment.appointments]);
-
-  useEffect(() => {
-    if (appointment.msg) {
-      dispatch(getPatients());
-      setTimeout(() => {
-        dispatch(appointmentAction?.clearMsg());
-      }, 3000);
-    }
-  }, [appointment.msg, dispatch]);
-
-  useEffect(() => {
-    if (appointment.reload) {
-      dispatch(getAppointments());
-      dispatch(appointmentAction.clearReload());
-    }
-  }, [appointment.reload, dispatch]);
 
   const getPatientName = (id: number) => {
     const name = appointment.patients?.filter(
@@ -152,13 +124,52 @@ const Appointment = () => {
 
   const handleChangeFilterDate = (date: any) => {
     setFilterDate(date);
-    statusFilter();
+    if (date === null) {
+      setReloadAppointment(true);
+    }
     const formatDate = new Date(date).toLocaleDateString();
-    const filterDateAppointments = appointmentList.filter(
-      (v: any) => v.date === formatDate
+    const filterDateAppointments = appointment.appointments.filter(
+      (v: any) => v.date === formatDate && v.status == statusAppointment
     );
-    setAppointmentList(filterDateAppointments);
+    setAppointmentList(
+      filterDateAppointments.length !== 0 ? filterDateAppointments : null
+    );
   };
+  /**************************EFFECTS******************/
+  useEffect(() => {
+    dispatch(getPatients());
+    dispatch(getAppointments());
+  }, [dispatch]);
+
+  useEffect(() => {
+    if (appointment.appointments) {
+      setAppointmentList(appointment.appointments);
+      statusFilter();
+    }
+  }, [appointment.appointments]);
+
+  useEffect(() => {
+    if (appointment.msg) {
+      dispatch(getPatients());
+      setTimeout(() => {
+        dispatch(appointmentAction?.clearMsg());
+      }, 3000);
+    }
+  }, [appointment.msg, dispatch]);
+
+  useEffect(() => {
+    if (appointment.reload) {
+      dispatch(getAppointments());
+      dispatch(appointmentAction.clearReload());
+    }
+  }, [appointment.reload, dispatch]);
+
+  useEffect(() => {
+    if (reloadAppointment) {
+      statusFilter();
+      setReloadAppointment(false);
+    }
+  }, [reloadAppointment, statusFilter]);
 
   const popoverMapKey = (
     <Popover id="popover-color-map-key">
@@ -203,7 +214,7 @@ const Appointment = () => {
         appointment={appointment}
       />
 
-      <Table borderless  responsive className="appointment-table">
+      <Table borderless responsive className="appointment-table">
         <thead>
           <tr>
             <th>
@@ -266,7 +277,7 @@ const Appointment = () => {
             <td>More Info</td>
             <td>Appointment Status</td>
           </tr>
-          {appointmentList.map((v: any) => {
+          {appointmentList?.map((v: any) => {
             return (
               <tr key={v.id}>
                 <td className="date-column">
