@@ -23,6 +23,7 @@ user123
 # Built
 ## Development Technologies
 ![](https://img.shields.io/badge/Front--End-React-blue)
+![](https://img.shields.io/badge/Programming--Language-TypeScript-blue)
 ![](https://img.shields.io/badge/Library-Redux-purple)
 
 # Live Demo
