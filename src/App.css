@@ -48,7 +48,7 @@
   width: 15vw !important;
 }
 ::-webkit-scrollbar {
-  width: 1vw;
+  width: 0.5vw;
 }
 ::-webkit-scrollbar-track {
   background: #888;

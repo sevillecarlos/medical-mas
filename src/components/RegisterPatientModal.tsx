@@ -29,7 +29,7 @@ const RegisterPatientModal = (props: RegisterPatient) => {
 
   const handleChangePatientDate = (date: any) =>
     setPatientForm((prevState: any) => {
-      const formatDate = new Date(date).toLocaleDateString();
+      const formatDate = new Date(date).toDateString();
       return { ...prevState, birth_date: formatDate };
     });
 

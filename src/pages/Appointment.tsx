@@ -25,7 +25,7 @@ import "./style/Appointments.css";
 
 import AlertModal from "../ui/AlertModal";
 
-const todayDate = new Date().toLocaleDateString();
+const todayDate = new Date().toDateString();
 const Appointment = () => {
   const dispatch = useDispatch();
   const appointment = useSelector((state: RootStateOrAny) => state.appointment);
@@ -285,14 +285,12 @@ const Appointment = () => {
               <tr key={v.id}>
                 <td className="date-column">
                   <span
-                    className={`${
-                      v.date === todayDate
-                        ? "appointment-remainder today"
-                        : "" || new Date(v.date) < new Date(todayDate)
-                        ? "appointment-remainder late"
-                        : "" || new Date(v.date) > new Date(todayDate)
-                        ? "appointment-remainder soon"
-                        : ""
+                    className={`appointment-remainder ${
+                      new Date(v.date) > new Date(todayDate)
+                        ? "soon"
+                        : new Date(v.date) < new Date(todayDate)
+                        ? "late"
+                        : "today"
                     } `}
                   >
                     {v.date}{" "}
