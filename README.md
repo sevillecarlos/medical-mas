@@ -1,46 +1,61 @@
-# Getting Started with Create React App
+# Medical MAS
+> A system to record medical appointments, ideal for a medical institution that control and order is its greatest virtue.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+![Medical MAS!](/assets/images/mas-image.png "Medical MAS")
 
-## Available Scripts
+## Steps
+* When you Sign Up, you will be credited with **$100**.
+* You can add to the **Cart**, and purchase the stickers.
+* To check your shopping history, go to you menu that say your name and navigate to **Checkout Record**.
+* To check your receipt detail, click on the **Receipt Code** that is in black.
 
-In the project directory, you can run:
+# Built
+## Development Technologies
+- React.ts 
+- Redux
+- Redux Toolkit
+## Libraries
+- BootstrapReact
+# Live Demo
+Try it! [Commerc-e ](https://commerc-e.netlify.app/)
 
-### `yarn start`
+# Getting Start
+```
+git clone https://github.com/sevillecarlos/commerc-e.git
+```
+### or Download the zip.
+## Project setup
+```
+npm install
+```
+### Compiles and hot-reloads for development
+```
+npm start
+```
+### Create your .env file for the environment variables
+#### CMS URL of the app
+* *REACT_APP_CMS_URL*
+#### Server URL of the app
+* *REACT_APP_SERVER_URL*
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## Commerc-e CMS
+Navigate to [Commerc-e CMS](https://github.com/sevillecarlos/commerc-e-cms) to found the CMS for the app, that contain the products of the Commerc-e store.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+## Commerc-e Server
+Navigate to [Commerc-e Server ](https://github.com/sevillecarlos/commerc-e-server) to found the server for the app.
 
-### `yarn test`
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+# Author
+## Carlos Alberto Sevilla Fernandez
+* Github: [@sevillecarlos](https://github.com/sevillecarlos)
+* LinkedIn: [Carlos Alberto Sevilla Fernandez](https://github.com/sevillecarlos)
 
-### `yarn build`
+# Contributing
+Contributions, issues and feature requests are welcome!
+Feel free to check the [Issues Page](https://github.com/sevillecarlos/commerc-e/issues).
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+# License
+This project is [MIT](https://opensource.org/licenses/MIT) licensed.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-### `yarn eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
