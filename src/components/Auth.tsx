@@ -83,7 +83,7 @@ const Auth = () => {
             )}
             {showLoader ? (
               <Button className="auth-btn" type="submit">
-                <Spinner animation="border" variant="secondary" />
+                <Spinner animation="border" variant="light" />
               </Button>
             ) : (
               <Button className="auth-btn" type="submit">
