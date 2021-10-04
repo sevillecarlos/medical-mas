@@ -22,11 +22,9 @@ user123
 
 # Built
 ## Development Technologies
-- React.ts 
-- Redux
-- Redux Toolkit
-## Libraries
-- BootstrapReact
+![](https://img.shields.io/badge/Front--End-React-blue)
+![](https://img.shields.io/badge/Library-Redux-purple)
+
 # Live Demo
 Try it! [Medical MAS](https://medical-mas.netlify.app/)
 
