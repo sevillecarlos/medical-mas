@@ -5,11 +5,12 @@
 
 ## Steps
 To enter to the system you can use.
-Username
+
+* **Username**
 ```
 user
 ```
-Password
+* **Password**
 ```
 user123
 ```
