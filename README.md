@@ -4,7 +4,7 @@
 ![Medical MAS!](/assets/images/mas-image.png "Medical MAS")
 
 ## Steps
-To enter to the system you can use.
+*To enter to the system you can use*
 
 * **Username**
 ```
@@ -15,11 +15,11 @@ user
 user123
 ```
 ## Instructions
-*
-*
-*
-*
-*
+* To **Register an Appointment**, first you need to **Register a Patient**
+* There is an appointment date indicator whether the **Date** is *TODAY*, *LATE* or *SOON*.
+* You can filter the appointments by **DATE**
+* When required you can **CLOSE** or **OPEN** an appointment 
+
 # Built
 ## Development Technologies
 - React.ts 
