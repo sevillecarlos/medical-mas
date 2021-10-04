@@ -40,7 +40,7 @@ npm start
 ### Create your .env file for the environment variables
 #### Server URL of the app
 * *REACT_APP_SERVER_URL*
-* 
+
 ## Medical MAS Server
 Navigate to [Medical MAS Server](https://github.com/sevillecarlos/medical-mas-server) to found the server for the app.
 
