@@ -6,6 +6,11 @@
 ## Steps
 *To enter to the system you can use*
 
+* **Usertype**
+```
+staff
+```
+
 * **Username**
 ```
 user
