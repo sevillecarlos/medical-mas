@@ -6,14 +6,14 @@
 ## Steps
 *To enter to the system you can use*
 
-* **Usertype**
+**Usertype** : 
 staff
 
-* **Username**
+ **Username**
 ```
 user
 ```
-* **Password**
+ **Password**
 ```
 user123
 ```
